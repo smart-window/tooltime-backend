@@ -28,6 +28,27 @@ const Part = PartModel(sequelize, Sequelize)
 const Product = ProductModel(sequelize, Sequelize)
 
 // Relationships
+Part.belongsTo(Product, {
+  foreignKey: {
+      name: 'productId',
+  },
+  constraints: false,
+});
+Product.hasMany(Part, {
+  foreignKey: {
+    name: 'productId',
+  },
+  constraints: false,
+});
+
+Part.belongsTo(Location, {
+  foreignKey: {
+      name: 'locationId',
+  },
+  constraints: false,
+});
+
+
 Servicearea.hasOne(Location, {
   foreignKey: {
     name: 'homeLocationId',
@@ -66,7 +87,7 @@ module.exports = async () => {
   }
 
   try {
-    await sequelize.sync()
+    await sequelize.sync({ alter: true })
     await sequelize.authenticate()
     connection.isConnected = true
     console.log('=> Created a new connection.')

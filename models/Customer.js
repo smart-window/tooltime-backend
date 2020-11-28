@@ -5,7 +5,6 @@ module.exports = (sequelize, type) => {
         id: {
             type: type.UUID,
             primaryKey: true,
-            defaultValue: sequelize.UUIDV1
         },
         name: type.STRING,
         notes: type.TEXT,
