@@ -1,0 +1,23 @@
+[IAM] tooltime-backend-serverless
+Access Key ID: AKIASZK47F3JIJG7ZLXM
+secret access key: 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
+
+[RDS] tooltime-backend-serverless-rds
+user: admin
+password: T0017!m3#
+[Cognito] tooltime-user-pool
+Pool Id: us-east-1_t5myKu9qn
+Pool ARN: arn:aws:cognito-idp:us-east-1:191857897170:userpool/us-east-1_t5myKu9qn
+Region: us-east-1
+
+[Cognito] tooltime-apps
+App Client Id: 4pq69o922a3r5tps2bke91p579
+
+[cognito] Domain Name
+https://tooltime.auth.us-east-1.amazoncognito.com
+
+[Cognito] Identity Pool
+Pool ID: us-east-1:e8704315-ca8f-47ed-b27e-d767b0a57aa9
+
+// how to get the Cognito UserID
+req.requestContext.identity.cognitoIdentityId

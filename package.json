@@ -1,0 +1,27 @@
+{
+  "name": "tooltime-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db-init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-amplify-serverless-plugin": "^1.4.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5",
+    "serverless-http": "^2.6.0",
+    "stripe": "^8.126.0",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "serverless-offline": "^6.8.0"
+  }
+}
