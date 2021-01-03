@@ -1,8 +1,6 @@
 'use strict';
-const dotenv = require("dotenv");
-dotenv.config();
+
 const connectToDatabase = require('./database/index') // initialize connection
-const port = 3000
 
 // simple Error constructor for handling HTTP error codes
 function HTTPError (statusCode, message) {
@@ -11,7 +9,7 @@ function HTTPError (statusCode, message) {
     return error
   }
 
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const express = require('express')
 const cors = require('cors')
@@ -21,13 +19,6 @@ app.use(cors())
 app.options('*', cors())
 
 app.use(bodyParser.json())
-app.use(function(req, res, next) {
-  try {
-    next()
-  } catch (e) {
-    res.status(500).send(e);
-  }
-})
 
 const configs = require('./routes/config')
 app.use('/config', configs)
@@ -61,6 +52,4 @@ app.get('/something', async (req, res) => {
     res.send('Successfully connected to database')
 })
 
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`)
-})
+module.exports.handler = serverless(app);

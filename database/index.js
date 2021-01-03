@@ -7,7 +7,6 @@ const LeadModel = require('../models/Lead')
 const PartModel = require('../models/Part')
 const ProductModel = require('../models/Product')
 const ConfigModel = require('../models/Config')
-
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -93,6 +92,6 @@ module.exports = async () => {
     console.log('=> Created a new connection.')
     return Models
   } catch(e) {
-    throw e
+    console.log('!! Unable to connect to database');
   }
 }

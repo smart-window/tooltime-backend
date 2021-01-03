@@ -1,0 +1,4 @@
+The standard MySQL Docker Image will run any .sh, .sql, or .sql.gz files in this.
+Files will be run in alphabetical order
+Simply attach this path to the container at /docker-entrypoint-initdb.d
+-v /my/path/with/files:/docker-entrypoint-initdb.d
