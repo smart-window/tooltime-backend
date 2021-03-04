@@ -20,3 +20,5 @@ Database uses Sequelize. You can find the initialization script in ./database/in
 You can find the individual models in ./models/\*.js
 Most of the models have some businss logic that sets a UUID instead of an incrementing integer for the ID.
 Both the Part and Product models have some business logic implemented within the models.
+
+The datbase container is configured to persist data between reboots. If you want to reset the data, delete the contents of ./.docker/tooltime-dev-db/mysql-data except the .gitkeep file. It is also configured to forward port 3306 to the container.
