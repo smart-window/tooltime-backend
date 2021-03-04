@@ -1,2 +1,0 @@
-MySQL will allow storing the data outside of the container simply mount this or another path to /var/lib/mysql thus
--v /my/own/datadir:/var/lib/mysql

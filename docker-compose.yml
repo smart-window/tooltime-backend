@@ -1,0 +1,17 @@
+# tell docker what version of the docker-compose.yml we're using
+version: "2"
+
+# start the services section
+services:
+  tooltime-dev-db:
+    build: ./.docker/tooltime-dev-db
+    container_name: tooltime-dev-db
+    environment:
+      MYSQL_DATABASE: "tooltime"
+      MYSQL_ROOT_PASSWORD: "password"
+    command: --innodb_file_per_table=0 --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./.docker/tooltime-dev-db/mysql-data:/var/lib/mysql
+      - ./.docker/tooltime-dev-db/conf:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"

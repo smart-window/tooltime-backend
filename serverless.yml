@@ -16,15 +16,17 @@ app: tooltime-backend
 service: tooltime-backend
 custom:
   secrets: ${file(secrets.${self:custom.stage}.json)}
-  stage: 'local'
-  amplify:
-    - filename: ../tooltime-warehouse/src/aws-exports.js
-      type: javascript
-      appClient: CognitoUserPoolClient
+  stage: "local"
+  serverless-offline:
+    noPrependStageInUrl: true
+  # amplify:
+  #   - filename: ../tooltime-warehouse/src/aws-exports.js
+  #     type: javascript
+  #     appClient: CognitoUserPoolClient
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
-frameworkVersion: '1'
+frameworkVersion: "1"
 
 provider:
   name: aws
@@ -32,7 +34,7 @@ provider:
   timeout: 30
   stage: ${self:custom.secrets.NODE_ENV}
   region: us-east-1
-  environment: 
+  environment:
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
     DB_NAME: ${self:custom.secrets.DB_NAME}
     DB_USER: ${self:custom.secrets.DB_USER}
@@ -62,10 +64,10 @@ provider:
 
 functions:
   tooltime-backend:
-    handler: index.handler
+    handler: index-serverless.handler
     events:
       - http: ANY /
-      - http: 'ANY /{proxy+}'
+      - http: "ANY /{proxy+}"
 
 # you can add CloudFormation resource templates here
 #resources:
@@ -78,36 +80,35 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
-plugins: 
- - serverless-offline
- - aws-amplify-serverless-plugin
+plugins:
+  - serverless-offline
+#  - aws-amplify-serverless-plugin
 
-resources:
-  - ${file(aws_resources/cognito-user-pool.yml)}
-  - ${file(aws_resources/cognito-identity-pool.yml)}
+#resources:
+# - ${file(aws_resources/cognito-user-pool.yml)}
+# - ${file(aws_resources/cognito-identity-pool.yml)}
 #  - ${file(aws_resources/api-gateway-errors.yml)}
-  - Resources:
-      AWSLambdaVPCAccessExecutionRole:
-        Type: AWS::IAM::ManagedPolicy
-        Properties:
-          Description: Creating policy for vpc connetion.
-          Roles:
-            - {"Ref" : "IamRoleLambdaExecution"}
-          PolicyDocument:
-              Version: '2012-10-17'
-              Statement:
-              - Effect: Allow
-                Action:
-                  - logs:CreateLogGroup
-                  - logs:CreateLogStream
-                  - logs:PutLogEvents
-                  - ec2:CreateNetworkInterface
-                  - ec2:DescribeNetworkInterfaces
-                  - ec2:DeleteNetworkInterface
-                  - ec2:AssignPrivateIpAddresses
-                  - ec2:UnassignPrivateIpAddresses
-                Resource: "*"
-
+# - Resources:
+#     AWSLambdaVPCAccessExecutionRole:
+#       Type: AWS::IAM::ManagedPolicy
+#       Properties:
+#         Description: Creating policy for vpc connetion.
+#         Roles:
+#           - {"Ref" : "IamRoleLambdaExecution"}
+#         PolicyDocument:
+#             Version: '2012-10-17'
+#             Statement:
+#             - Effect: Allow
+#               Action:
+#                 - logs:CreateLogGroup
+#                 - logs:CreateLogStream
+#                 - logs:PutLogEvents
+#                 - ec2:CreateNetworkInterface
+#                 - ec2:DescribeNetworkInterfaces
+#                 - ec2:DeleteNetworkInterface
+#                 - ec2:AssignPrivateIpAddresses
+#                 - ec2:UnassignPrivateIpAddresses
+#               Resource: "*"
 
 # service: aurora
 

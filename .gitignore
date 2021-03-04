@@ -6,3 +6,4 @@ jspm_packages
 .serverless
 
 .env
+.docker/tooltime-dev-db/mysql-data
