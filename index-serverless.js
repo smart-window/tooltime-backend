@@ -1,16 +1,16 @@
-'use strict';
+'use strict'
 
 const connectToDatabase = require('./database/index') // initialize connection
 
 // simple Error constructor for handling HTTP error codes
-function HTTPError (statusCode, message) {
-    const error = new Error(message)
-    error.statusCode = statusCode
-    return error
-  }
+function HTTPError(statusCode, message) {
+  const error = new Error(message)
+  error.statusCode = statusCode
+  return error
+}
 
-const serverless = require('serverless-http');
-const bodyParser = require('body-parser');
+const serverless = require('serverless-http')
+const bodyParser = require('body-parser')
 const express = require('express')
 const cors = require('cors')
 const app = express()
@@ -48,8 +48,8 @@ const stripe = require('./routes/stripe')
 app.use('/stripe', stripe)
 
 app.get('/something', async (req, res) => {
-    await connectToDatabase()
-    res.send('Successfully connected to database')
+  await connectToDatabase()
+  res.send('Successfully connected to database')
 })
 
-module.exports.handler = serverless(app);
+module.exports.handler = serverless(app)

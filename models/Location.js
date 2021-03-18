@@ -1,11 +1,13 @@
-const uuid = require('uuid');
+const uuid = require('uuid')
 
 module.exports = (sequelize, type) => {
-    const obj = sequelize.define('Location', {
+  const obj = sequelize.define(
+    'Location',
+    {
       id: {
         type: type.UUID,
         primaryKey: true,
-        defaultValue: sequelize.UUIDV4
+        defaultValue: sequelize.UUIDV4,
       },
       name: type.STRING,
       description: type.TEXT,
@@ -17,10 +19,11 @@ module.exports = (sequelize, type) => {
       phone: type.STRING,
       hours: type.STRING,
       active: type.BOOLEAN,
-    }, {
-    })
+    },
+    {},
+  )
 
-    obj.beforeCreate(obj => obj.id = uuid.v4())
-    
-    return obj
-  }
+  obj.beforeCreate(obj => (obj.id = uuid.v4()))
+
+  return obj
+}
