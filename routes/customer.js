@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes')
 var express = require('express')
 var router = express.Router()
 
@@ -24,7 +25,21 @@ router.get('/:id?', async (req, res) => {
   }
 })
 
+/**
+ * @params {...req.body}
+ * email: string
+ * password: string
+ * name: string
+ * phone: string
+ * address: string
+ * city: string
+ * state: string
+ * zip: string
+ * stripeId: string
+ * notes: text
+ */
 router.post('/', async (req, res) => {
+  console.log('[POST] /customer =>', req.body)
   try {
     const { Customer } = await connectToDatabase()
     const r = await Customer.create(req.body)
@@ -32,7 +47,8 @@ router.post('/', async (req, res) => {
     if (customer) res.send(customer)
     else res.send({ error: 'model not found' })
   } catch (e) {
-    res.send(e)
+    console.log('error =>', e.message)
+    res.status(StatusCodes.BAD_REQUEST).send(e.message)
   }
 })
 

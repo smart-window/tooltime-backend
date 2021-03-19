@@ -20,6 +20,9 @@ app.options('*', cors())
 
 app.use(bodyParser.json())
 
+const auth = require('./routes/auth')
+app.use('/auth', auth)
+
 const configs = require('./routes/config')
 app.use('/config', configs)
 
