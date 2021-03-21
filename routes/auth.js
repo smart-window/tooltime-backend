@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
     expiresIn: process.env.AUTH_TOKEN_LIFE,
   })
 
-  res.send(jwtToken)
+  res.send({ accessToken: jwtToken })
 })
 
 /**
@@ -99,6 +99,11 @@ router.get('/account', async (req, res) => {
       error: err.message,
     })
   }
+})
+
+router.get('/logout', async (req, res) => {
+  console.log('[GET] /auth/logout')
+  res.send({ success: true })
 })
 
 module.exports = router
