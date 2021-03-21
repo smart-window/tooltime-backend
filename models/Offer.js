@@ -30,10 +30,14 @@ module.exports = (sequelize, type) => {
       stripePriceId: type.STRING,
       active: type.BOOLEAN,
     },
-    {},
+    {
+      hooks: {
+        beforeCreate: obj => {
+          obj.id = uuid.v4()
+        },
+      },
+    },
   )
-
-  obj.beforeCreate(obj => (obj.id = uuid.v4()))
 
   return obj
 }

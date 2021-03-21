@@ -4,27 +4,27 @@ const {
   Lead,
   Location,
   Offer,
-  Part,
+  Asset,
   Product,
   Servicearea,
   sequelize,
 } = require('../models')
 
 // Relationships
-Part.belongsTo(Product, {
+Asset.belongsTo(Product, {
   foreignKey: {
     name: 'productId',
   },
   constraints: false,
 })
-Product.hasMany(Part, {
+Product.hasMany(Asset, {
   foreignKey: {
     name: 'productId',
   },
   constraints: false,
 })
 
-Part.belongsTo(Location, {
+Asset.belongsTo(Location, {
   foreignKey: {
     name: 'locationId',
   },
@@ -67,7 +67,7 @@ const Models = {
   Offer,
   Customer,
   Lead,
-  Part,
+  Asset,
   Product,
 }
 const connection = {}
@@ -79,7 +79,6 @@ module.exports = async () => {
   }
 
   try {
-    await sequelize.sync({ alter: true, force: true })
     await sequelize.authenticate()
     connection.isConnected = true
     console.log('Created a new connection.')

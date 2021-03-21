@@ -7,6 +7,7 @@ module.exports = (sequelize, type) => {
       id: {
         type: type.UUID,
         primaryKey: true,
+        defaultValue: type.UUIDV4,
       },
       name: type.STRING,
       notes: type.TEXT,
@@ -24,10 +25,14 @@ module.exports = (sequelize, type) => {
         },
       },
     },
-    {},
+    {
+      hooks: {
+        beforeCreate: lead => {
+          lead.id = uuid.v4()
+        },
+      },
+    },
   )
-
-  obj.beforeCreate(obj => (obj.id = uuid.v4()))
 
   return obj
 }

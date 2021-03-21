@@ -20,10 +20,14 @@ module.exports = (sequelize, type) => {
       hours: type.STRING,
       active: type.BOOLEAN,
     },
-    {},
+    {
+      hooks: {
+        beforeCreate: obj => {
+          obj.id = uuid.v4()
+        },
+      },
+    },
   )
-
-  obj.beforeCreate(obj => (obj.id = uuid.v4()))
 
   return obj
 }

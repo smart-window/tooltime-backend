@@ -5,17 +5,17 @@ const connectToDatabase = require('../database/index') // initialize connection
 
 router.get('/:id?', async (req, res) => {
   try {
-    const { Part } = await connectToDatabase()
+    const { Asset } = await connectToDatabase()
     if (!req.params.id) {
-      const list = await Part.findAll({
+      const list = await Asset.findAll({
         where: {},
         order: [['name', 'ASC']],
       })
 
       res.send(list)
     } else {
-      const part = await Part.findByPk(req.params.id)
-      if (part) res.send(part)
+      const asset = await Asset.findByPk(req.params.id)
+      if (asset) res.send(asset)
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
@@ -25,10 +25,10 @@ router.get('/:id?', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { Part } = await connectToDatabase()
-    const r = await Part.create(req.body)
-    const part = await Part.findByPk(r.id)
-    if (part) res.send(part)
+    const { Asset } = await connectToDatabase()
+    const r = await Asset.create(req.body)
+    const asset = await Asset.findByPk(r.id)
+    if (asset) res.send(asset)
     else res.send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
@@ -37,13 +37,13 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   try {
-    const { Part } = await connectToDatabase()
-    await Part.update(req.body, {
+    const { Asset } = await connectToDatabase()
+    await Asset.update(req.body, {
       where: { id: req.params.id },
     })
 
-    const part = await Part.findByPk(req.params.id)
-    if (part) res.send(part)
+    const asset = await Asset.findByPk(req.params.id)
+    if (asset) res.send(asset)
     else res.send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
@@ -52,10 +52,10 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const { Part } = await connectToDatabase()
-    const part = await Part.findByPk(req.params.id)
-    if (part) {
-      var destroy_res = await part.destroy()
+    const { Asset } = await connectToDatabase()
+    const asset = await Asset.findByPk(req.params.id)
+    if (asset) {
+      var destroy_res = await asset.destroy()
       res.send({ id: destroy_res.id })
     } else res.send({ error: 'model not found' })
   } catch (e) {

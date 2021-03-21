@@ -41,8 +41,8 @@ app.use('/lead', leads)
 const offer = require('./routes/offer')
 app.use('/offer', offer)
 
-const part = require('./routes/part')
-app.use('/part', part)
+const asset = require('./routes/asset')
+app.use('/asset', asset)
 
 const product = require('./routes/product')
 app.use('/product', product)
