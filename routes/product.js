@@ -10,11 +10,12 @@ router.get('/:id?', async (req, res) => {
       const list = await Product.findAll({
         where: {},
         order: [['name', 'ASC']],
+        include: ['category', 'section'],
       })
 
       res.send(list)
     } else {
-      const product = await Product.findByPk(req.params.id)
+      const product = await Product.findByPk(req.params.id, { include: ['category', 'section'] })
       if (product) res.send(product)
       else res.send({ error: 'model not found' })
     }
@@ -27,7 +28,7 @@ router.post('/', async (req, res) => {
   try {
     const { Product } = await connectToDatabase()
     const r = await Product.create(req.body)
-    const product = await Product.findByPk(r.id)
+    const product = await Product.findByPk(r.id, { include: ['category', 'section'] })
     if (product) res.send(product)
     else res.send({ error: 'model not found' })
   } catch (e) {

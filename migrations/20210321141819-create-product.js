@@ -1,23 +1,40 @@
 'use strict'
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('products', {
       id: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: Sequelize.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
       },
-      name: Sequelize.STRING,
-      description: Sequelize.TEXT,
-      category: Sequelize.STRING,
-      section: Sequelize.STRING,
-      available: Sequelize.INTEGER,
-      picking: Sequelize.INTEGER,
-      inUse: Sequelize.INTEGER,
-      shelving: Sequelize.INTEGER,
-      outOfCirc: Sequelize.INTEGER,
-      onOrder: Sequelize.INTEGER,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: DataTypes.TEXT,
+      categoryId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      sectionId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      available: DataTypes.INTEGER,
+      picking: DataTypes.INTEGER,
+      inUse: DataTypes.INTEGER,
+      shelving: DataTypes.INTEGER,
+      outOfCirc: DataTypes.INTEGER,
+      onOrder: DataTypes.INTEGER,
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
     })
   },
 
