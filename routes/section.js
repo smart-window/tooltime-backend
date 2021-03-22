@@ -5,19 +5,18 @@ const connectToDatabase = require('../database/index') // initialize connection
 
 router.get('/:id?', async (req, res) => {
   try {
-    const { Category } = await connectToDatabase()
+    const { Section } = await connectToDatabase()
 
     if (!req.params.id) {
-      const list = await Category.findAll({
+      const list = await Section.findAll({
         where: {},
         order: [['name', 'ASC']],
-        include: 'sections',
+        include: 'category',
       })
-
       res.send(list)
     } else {
-      const category = await Category.findByPk(req.params.id, { include: 'sections' })
-      if (category) res.send(category)
+      const section = await Section.findByPk(req.params.id, { include: 'category' })
+      if (section) res.send(section)
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
@@ -27,11 +26,17 @@ router.get('/:id?', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { Category } = await connectToDatabase()
-    const r = await Category.create(req.body)
-    const category = await Category.findByPk(r.id)
-    if (category) res.send(category)
-    else res.send({ error: 'model not found' })
+    const { Section, Category } = await connectToDatabase()
+    const cat = await Category.findOne({
+      where: {
+        id: req.body.categoryId,
+      },
+    })
+    const res = await Section.create(req.body)
+    if (res) {
+      const section = await Section.findByPk(res.id, { include: 'category' })
+      res.send(section)
+    } else res.send({ error: 'model not found' })
   } catch (e) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: e.message })
   }
@@ -39,13 +44,13 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   try {
-    const { Category } = await connectToDatabase()
-    await Category.update(req.body, {
+    const { Section } = await connectToDatabase()
+    await Section.update(req.body, {
       where: { id: req.params.id },
     })
 
-    const category = await Category.findByPk(req.params.id)
-    if (category) res.send(category)
+    const section = await Section.findByPk(req.params.id)
+    if (section) res.send(section)
     else res.send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
@@ -54,10 +59,10 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const { Category } = await connectToDatabase()
-    const category = await Category.findByPk(req.params.id)
-    if (category) {
-      var destroy_res = await category.destroy()
+    const { Section } = await connectToDatabase()
+    const section = await Section.findByPk(req.params.id)
+    if (section) {
+      var destroy_res = await section.destroy()
       res.send({ id: destroy_res.id })
     } else res.send({ error: 'model not found' })
   } catch (e) {

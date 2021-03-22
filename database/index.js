@@ -8,6 +8,7 @@ const {
   Product,
   Servicearea,
   Category,
+  Section,
   sequelize,
 } = require('../models')
 
@@ -39,28 +40,6 @@ Servicearea.hasOne(Location, {
   constraints: false,
 })
 
-/*
-Servicearea.hasMany(Location, {
-  constraints: false
-})
-
-
-Customer.belongsTo(Location)
-
-Part.belongsTo(Location)
-Part.belongsTo(Product)
-Location.hasMany(Customer, {
-  constraints: false,
-})
-Location.hasMany(Part, {
-  constraints: false
-})
-
-Product.hasMany(Part, {
-  constraints: false
-})
-*/
-
 const Models = {
   Config,
   Location,
@@ -71,6 +50,7 @@ const Models = {
   Asset,
   Product,
   Category,
+  Section,
 }
 const connection = {}
 

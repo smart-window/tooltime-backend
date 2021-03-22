@@ -49,6 +49,9 @@ app.use('/stripe', stripe)
 const category = require('./category')
 app.use('/category', category)
 
+const section = require('./section')
+app.use('/section', section)
+
 app.get('/something', async (req, res) => {
   await connectToDatabase()
   res.send('Successfully connected to database')
