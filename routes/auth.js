@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { StatusCodes } = require('http-status-codes')
 const connectToDatabase = require('../database/index')
+const { default: Stripe } = require('stripe')
 
 /**
  * customer login
@@ -30,7 +31,6 @@ router.post('/login', async (req, res) => {
     email: loggedUser.email,
   }
 
-  console.log('process.env.AUTH_TOKEN_LIFE =>', process.env.AUTH_TOKEN_LIFE)
   const jwtToken = jwt.sign(payload, process.env.AUTH_TOKEN_SECRET, {
     expiresIn: process.env.AUTH_TOKEN_LIFE,
   })
@@ -60,7 +60,7 @@ router.post('/register', async (req, res) => {
     if (customer) res.send(customer)
     else res.send({ error: 'model not found' })
   } catch (e) {
-    console.log('error =>', e.message)
+    console.log('[POST] /auth/register.error =>', e.message)
     res.status(StatusCodes.BAD_REQUEST).send(e.message)
   }
 })
@@ -75,18 +75,25 @@ router.get('/account', async (req, res) => {
     const { Customer } = await connectToDatabase()
     const { accesstoken: accessToken } = req.headers
 
-    console.log('[GET] /auth/account.AccessToken', accessToken)
     if (accessToken) {
       const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
       const user = await Customer.findOne({ where: { email } })
-      const userData = Object.assign({}, user)
-      console.log('user => ', user)
-      console.log('userData => ', userData)
       if (user) {
-        userData.accessToken = jwt.sign({ email }, process.env.AUTH_TOKEN_SECRET, {
+        const responseData = {
+          email: user.email,
+          name: user.name,
+          role: 'customer',
+          address: user.address,
+          city: user.city,
+          state: user.state,
+          zip: user.zip,
+          phone: user.phone,
+          stripeId: user.stripeId,
+        }
+        responseData.accessToken = jwt.sign({ email }, process.env.AUTH_TOKEN_SECRET, {
           expiresIn: process.env.AUTH_TOKEN_LIFE,
         })
-        return res.send(userData)
+        return res.send(responseData)
       } else {
         res.status(StatusCodes.UNAUTHORIZED).send('Not authorized')
       }

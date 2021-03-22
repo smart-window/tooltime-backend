@@ -7,6 +7,7 @@ const {
   Asset,
   Product,
   Servicearea,
+  Category,
   sequelize,
 } = require('../models')
 
@@ -69,6 +70,7 @@ const Models = {
   Lead,
   Asset,
   Product,
+  Category,
 }
 const connection = {}
 
