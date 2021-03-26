@@ -22,10 +22,15 @@ router.post('/login', async (req, res) => {
 
   if (!loggedUser) {
     res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
+    return
   }
 
   const isPwdMatch = await bcrypt.compare(password, loggedUser.password())
-  if (!isPwdMatch) res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
+
+  if (!isPwdMatch) {
+    res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
+    return
+  }
 
   const payload = {
     email: loggedUser.email,
@@ -36,6 +41,7 @@ router.post('/login', async (req, res) => {
   })
 
   res.send({ accessToken: jwtToken })
+  return
 })
 
 /**
