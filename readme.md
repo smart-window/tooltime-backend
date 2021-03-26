@@ -22,3 +22,13 @@ Most of the models have some businss logic that sets a UUID instead of an increm
 Both the Part and Product models have some business logic implemented within the models.
 
 The datbase container is configured to persist data between reboots. If you want to reset the data, delete the contents of ./.docker/tooltime-dev-db/mysql-data except the .gitkeep file. It is also configured to forward port 3306 to the container.
+
+To launch the new backend:
+$ npm install -g nodemon
+$ npm install -g sequelize-cli
+$ cp .env.dist .env
+$ docker-compose up --build
+$ sequelize db:migrate
+$ sequelize db:seed:all
+
+Login with admin@admin.com / aaa
