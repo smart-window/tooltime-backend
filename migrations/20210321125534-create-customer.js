@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('customers', {
+    await queryInterface.createTable('Customers', {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
@@ -41,10 +41,18 @@ module.exports = {
       stripeId: DataTypes.STRING,
       zip: DataTypes.STRING,
       notes: DataTypes.TEXT,
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('customers')
+    await queryInterface.dropTable('Customers')
   },
 }
