@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
   }
 
   const jwtToken = jwt.sign(payload, process.env.AUTH_TOKEN_SECRET, {
-    expiresIn: process.env.AUTH_TOKEN_LIFE,
+    expiresIn: '1d',
   })
 
   res.send({ accessToken: jwtToken })
@@ -97,7 +97,7 @@ router.get('/account', async (req, res) => {
           stripeId: user.stripeId,
         }
         responseData.accessToken = jwt.sign({ email }, process.env.AUTH_TOKEN_SECRET, {
-          expiresIn: process.env.AUTH_TOKEN_LIFE,
+          expiresIn: '1d',
         })
         return res.send(responseData)
       } else {

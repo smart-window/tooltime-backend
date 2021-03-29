@@ -16,7 +16,7 @@ router.get('/:id?', async (req, res) => {
       res.send(list)
     } else {
       const product = await Product.findByPk(req.params.id, { include: ['category', 'section'] })
-      if (product) res.send(product)
+      if (product) res.json(product)
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     const { Product } = await connectToDatabase()
     const r = await Product.create(req.body)
     const product = await Product.findByPk(r.id, { include: ['category', 'section'] })
-    if (product) res.send(product)
+    if (product) res.json(product)
     else res.send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
@@ -44,7 +44,7 @@ router.patch('/:id', async (req, res) => {
     })
 
     const product = await Product.findByPk(req.params.id)
-    if (product) res.send(product)
+    if (product) res.json(product)
     else res.send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
