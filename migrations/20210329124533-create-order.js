@@ -44,6 +44,19 @@ module.exports = {
         type: DataTypes.STRING, // Foreign Key ----> Customer
         allowNull: false,
       },
+      pickupDate: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      notes: {
+        type: DataTypes.STRING,
+      },
+      status: {
+        type: DataTypes.ENUM({
+          values: ['PENDING', 'PICKED', 'DELIVERED', 'RETURNED', 'EXPIRED'],
+        }),
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

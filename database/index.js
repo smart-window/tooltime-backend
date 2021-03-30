@@ -9,6 +9,8 @@ const {
   Servicearea,
   Category,
   Section,
+  Order,
+  OrderItem,
   sequelize,
 } = require('../models')
 
@@ -51,6 +53,8 @@ const Models = {
   Product,
   Category,
   Section,
+  Order,
+  OrderItem,
 }
 const connection = {}
 
