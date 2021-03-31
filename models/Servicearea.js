@@ -1,37 +1,59 @@
-const uuid = require('uuid')
-
-module.exports = (sequelize, type) => {
-  const obj = sequelize.define(
-    'Servicearea',
+'use strict'
+const { Model } = require('sequelize')
+module.exports = (sequelize, DataTypes) => {
+  class Servicearea extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  Servicearea.init(
     {
       id: {
-        type: type.UUID,
+        type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: sequelize.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
       },
-      zip: { type: type.INTEGER, allowNull: false },
-      city: type.STRING,
-      state: type.STRING,
-      latitude: type.FLOAT,
-      longitude: type.FLOAT,
-      timezone: type.INTEGER,
-      dst: type.BOOLEAN,
-      meta1: type.STRING,
-      meta2: type.STRING,
-      meta3: type.STRING,
-      meta4: type.STRING,
-      meta5: type.STRING,
+      zip: { type: DataTypes.INTEGER, allowNull: false },
+      city: DataTypes.STRING,
+      state: DataTypes.STRING,
+      latitude: DataTypes.FLOAT,
+      longitude: DataTypes.FLOAT,
+      timezone: DataTypes.INTEGER,
+      dst: DataTypes.BOOLEAN,
+      meta1: DataTypes.STRING,
+      meta2: DataTypes.STRING,
+      meta3: DataTypes.STRING,
+      meta4: DataTypes.STRING,
+      meta5: DataTypes.STRING,
       active: {
-        type: type.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
       },
-      homeLocationId: type.UUID,
+      homeLocationId: DataTypes.UUID,
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
     },
-    {},
+    {
+      sequelize,
+      modelName: 'Servicearea',
+      hooks: {
+        beforeCreate: obj => {
+          obj.id = uuid.v4()
+        },
+      },
+    },
   )
-
-  obj.beforeCreate(obj => (obj.id = uuid.v4()))
-
-  return obj
+  return Servicearea
 }

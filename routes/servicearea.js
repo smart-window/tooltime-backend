@@ -21,6 +21,7 @@ router.get('/:id?', async (req, res) => {
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
+    console.log(e)
     res.send(e)
   }
 })

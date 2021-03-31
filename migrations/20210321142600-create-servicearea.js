@@ -26,6 +26,14 @@ module.exports = {
         defaultValue: false,
       },
       homeLocationId: Sequelize.UUID,
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     })
   },
 
