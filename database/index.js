@@ -14,34 +14,6 @@ const {
   sequelize,
 } = require('../models')
 
-// Relationships
-Asset.belongsTo(Product, {
-  foreignKey: {
-    name: 'productId',
-  },
-  constraints: false,
-})
-Product.hasMany(Asset, {
-  foreignKey: {
-    name: 'productId',
-  },
-  constraints: false,
-})
-
-Asset.belongsTo(Location, {
-  foreignKey: {
-    name: 'locationId',
-  },
-  constraints: false,
-})
-
-Servicearea.hasOne(Location, {
-  foreignKey: {
-    name: 'homeLocationId',
-  },
-  constraints: false,
-})
-
 const Models = {
   Config,
   Location,

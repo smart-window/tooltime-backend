@@ -21,18 +21,21 @@ router.get('/:id?', async (req, res) => {
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
+    console.log(e)
     res.send(e)
   }
 })
 
 router.post('/', async (req, res) => {
+  console.log('[POST] /location =>', req.body)
   try {
     const { Location } = await connectToDatabase()
     const r = await Location.create(req.body)
     const location = await Location.findByPk(r.id)
-    if (location) res.send(location)
+    if (location) res.json(location)
     else res.send({ error: 'model not found' })
   } catch (e) {
+    console.log(e)
     res.send(e)
   }
 })

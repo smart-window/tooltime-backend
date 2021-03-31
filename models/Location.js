@@ -40,11 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Location',
-      hooks: {
-        beforeCreate: obj => {
-          obj.id = uuid.v4()
-        },
-      },
+      hooks: {},
     },
   )
   return Location
