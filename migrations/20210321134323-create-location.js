@@ -18,6 +18,14 @@ module.exports = {
       phone: Sequelize.STRING,
       hours: Sequelize.STRING,
       active: Sequelize.BOOLEAN,
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     })
   },
 

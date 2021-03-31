@@ -1,26 +1,45 @@
-const uuid = require('uuid')
-
-module.exports = (sequelize, type) => {
-  const obj = sequelize.define(
-    'Location',
+'use strict'
+const { Model } = require('sequelize')
+module.exports = (sequelize, DataTypes) => {
+  class Location extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  Location.init(
     {
       id: {
-        type: type.UUID,
+        type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: sequelize.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
       },
-      name: type.STRING,
-      description: type.TEXT,
-      address_1: type.STRING,
-      address_2: type.STRING,
-      city: type.STRING,
-      state: type.STRING,
-      zip: type.STRING,
-      phone: type.STRING,
-      hours: type.STRING,
-      active: type.BOOLEAN,
+      name: DataTypes.STRING,
+      description: DataTypes.TEXT,
+      address_1: DataTypes.STRING,
+      address_2: DataTypes.STRING,
+      city: DataTypes.STRING,
+      state: DataTypes.STRING,
+      zip: DataTypes.STRING,
+      phone: DataTypes.STRING,
+      hours: DataTypes.STRING,
+      active: DataTypes.BOOLEAN,
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
     },
     {
+      sequelize,
+      modelName: 'Location',
       hooks: {
         beforeCreate: obj => {
           obj.id = uuid.v4()
@@ -28,6 +47,5 @@ module.exports = (sequelize, type) => {
       },
     },
   )
-
-  return obj
+  return Location
 }

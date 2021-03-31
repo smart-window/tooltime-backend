@@ -1,8 +1,18 @@
 const uuid = require('uuid')
+const { Model } = require('sequelize')
 
 module.exports = (sequelize, type) => {
-  const obj = sequelize.define(
-    'Asset',
+  class Asset extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  Asset.init(
     {
       id: {
         type: type.UUID,
@@ -24,6 +34,8 @@ module.exports = (sequelize, type) => {
       active: type.BOOLEAN,
     },
     {
+      sequelize,
+      modelName: 'Asset',
       hooks: {
         beforeBulkUpdate: options => {
           options.individualHooks = true
@@ -67,6 +79,5 @@ module.exports = (sequelize, type) => {
       },
     },
   )
-
-  return obj
+  return Asset
 }

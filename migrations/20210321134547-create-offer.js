@@ -28,6 +28,14 @@ module.exports = {
       autorenew: Sequelize.BOOLEAN,
       stripePriceId: Sequelize.STRING,
       active: Sequelize.BOOLEAN,
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     })
   },
 

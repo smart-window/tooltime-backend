@@ -21,6 +21,14 @@ module.exports = {
       statusDescription: Sequelize.TEXT,
       description: Sequelize.TEXT,
       active: Sequelize.BOOLEAN,
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     })
   },
 
