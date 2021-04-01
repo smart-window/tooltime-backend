@@ -12,6 +12,7 @@ router.get('/:id?', async (req, res) => {
       const list = await Order.findAll({
         where: {},
         order: [['name', 'ASC']],
+        include: 'orderItems',
       })
 
       res.send(list)
