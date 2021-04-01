@@ -1,7 +1,8 @@
+const _ = require('lodash')
 var express = require('express')
 var router = express.Router()
-
 const connectToDatabase = require('../database/index') // initialize connection
+const { ORDER_STATUS } = require('../constants')
 
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /order =>', req.params)
@@ -29,7 +30,9 @@ router.post('/', async (req, res) => {
   console.log('[POST] /order =>', req.body)
   try {
     const { Order } = await connectToDatabase()
-    const r = await Order.create(req.body)
+    const newOrderRequest = _.cloneDeep(req.body)
+    newOrderRequest.status = ORDER_STATUS.PENDING
+    const r = await Order.create(newOrderRequest, { include: 'orderItems' })
     const order = await Order.findByPk(r.id)
     if (order) res.json(order)
     else res.send({ error: 'model not found' })
