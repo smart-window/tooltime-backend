@@ -52,6 +52,9 @@ app.use('/category', category)
 const section = require('./section')
 app.use('/section', section)
 
+const order = require('./order')
+app.use('/order', order)
+
 app.get('/something', async (req, res) => {
   await connectToDatabase()
   res.send('Successfully connected to database')
