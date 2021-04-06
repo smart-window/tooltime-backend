@@ -17,7 +17,7 @@ router.get('/:id?', async (req, res) => {
 
       res.send(list)
     } else {
-      const order = await Order.findByPk(req.params.id)
+      const order = await Order.findByPk(req.params.id, { include: 'orderItems' })
       if (order) res.send(order)
       else res.send({ error: 'model not found' })
     }
@@ -39,6 +39,21 @@ router.post('/', async (req, res) => {
     else res.send({ error: 'model not found' })
   } catch (e) {
     console.log(e)
+    res.send(e)
+  }
+})
+
+router.delete('/:id', async (req, res) => {
+  console.log('[DELETE] /order =>', req.body)
+  try {
+    const { Order, OrderItem } = await connectToDatabase()
+    const order = await Order.findByPk(req.params.id)
+    if (order) {
+      var destroy_res = await order.destroy()
+      await OrderItem.destroy({ where: { orderId: req.params.id } })
+      res.send({ id: destroy_res.id })
+    } else res.send({ error: 'model not found' })
+  } catch (e) {
     res.send(e)
   }
 })
