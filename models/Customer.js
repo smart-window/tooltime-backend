@@ -1,17 +1,19 @@
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
-
-module.exports = (sequelize, type) => {
-  const obj = sequelize.define(
-    'Customer',
+const { Model } = require('sequelize')
+module.exports = (sequelize, DataTypes) => {
+  class Customer extends Model {
+    static associate({ Customer }) {}
+  }
+  Customer.init(
     {
       id: {
-        type: type.UUID,
+        type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: type.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
-        type: type.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: { msg: 'User must have a name' },
@@ -19,7 +21,7 @@ module.exports = (sequelize, type) => {
         },
       },
       email: {
-        type: type.STRING,
+        type: DataTypes.STRING,
         unique: true,
         allowNull: false,
         validate: {
@@ -29,22 +31,24 @@ module.exports = (sequelize, type) => {
         },
       },
       password: {
-        type: type.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         get() {
           return () => this.getDataValue('password')
         },
       },
-      phone: type.STRING,
-      address: type.STRING,
-      city: type.STRING,
-      state: type.STRING,
-      idpId: type.STRING,
-      stripeId: type.STRING,
-      zip: type.STRING,
-      notes: type.TEXT,
+      phone: DataTypes.STRING,
+      address: DataTypes.STRING,
+      city: DataTypes.STRING,
+      state: DataTypes.STRING,
+      idpId: DataTypes.STRING,
+      stripeId: DataTypes.STRING,
+      zip: DataTypes.STRING,
+      notes: DataTypes.TEXT,
     },
     {
+      sequelize,
+      modelName: 'Customer',
       instanceMethods: {
         validPassword(password) {
           return bcrypt.compare(password, this.password())
@@ -59,6 +63,5 @@ module.exports = (sequelize, type) => {
       },
     },
   )
-
-  return obj
+  return Customer
 }

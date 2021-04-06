@@ -58,4 +58,21 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  console.log('[PUT] /order =>', req.body)
+  try {
+    const { Order } = await connectToDatabase()
+    await Order.update(req.body, {
+      where: { id: req.params.id },
+      include: 'orderItems',
+    })
+
+    const order = await Order.findByPk(req.params.id, { include: 'orderItems' })
+    if (order) res.json(order)
+    else res.send({ error: 'model not found' })
+  } catch (e) {
+    res.send(e)
+  }
+})
+
 module.exports = router

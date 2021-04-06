@@ -86,6 +86,7 @@ router.get('/account', async (req, res) => {
       const user = await Customer.findOne({ where: { email } })
       if (user) {
         const responseData = {
+          id: user.id,
           email: user.email,
           name: user.name,
           role: 'customer',
