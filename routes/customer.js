@@ -61,9 +61,11 @@ router.patch('/:id', async (req, res) => {
 
     const customer = await Customer.findByPk(req.params.id)
     if (customer) res.send(customer)
-    else res.send({ error: 'model not found' })
+    else {
+      res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
+    }
   } catch (e) {
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: e.message })
   }
 })
 
@@ -73,10 +75,12 @@ router.delete('/:id', async (req, res) => {
     const customer = await Customer.findByPk(req.params.id)
     if (customer) {
       var destroy_res = await customer.destroy()
-      res.send({ id: destroy_res.id })
-    } else res.send({ error: 'model not found' })
+      res.json({ id: destroy_res.id })
+    } else {
+      res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
+    }
   } catch (e) {
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: e.message })
   }
 })
 
