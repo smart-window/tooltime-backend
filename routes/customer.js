@@ -61,7 +61,7 @@ router.patch('/:id', async (req, res) => {
     })
 
     const customer = await Customer.findByPk(req.params.id)
-    if (customer) res.send(customer)
+    if (customer) res.json(customer)
     else {
       res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
     }
