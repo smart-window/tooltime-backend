@@ -53,6 +53,7 @@ router.post('/', async (req, res) => {
 })
 
 router.patch('/:id', async (req, res) => {
+  console.log('[PATCH] /customer =>', req.body)
   try {
     const { Customer } = await connectToDatabase()
     await Customer.update(req.body, {

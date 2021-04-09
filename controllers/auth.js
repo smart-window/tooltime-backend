@@ -4,10 +4,10 @@ const connectToDatabase = require('../database/index')
 
 const requireAuth = async (req, res, next) => {
   try {
-    const { Customer } = connectToDatabase()
-    const { AccessToken } = req.headers
-    if (AccessToken) {
-      const { email } = jwt.verify(AccessToken, process.env.AUTH_TOKEN_SECRET)
+    const { Customer } = await connectToDatabase()
+    const { accesstoken: accessToken } = req.headers
+    if (accessToken) {
+      const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
       const user = await Customer.findOne({ where: { email } })
       if (user) {
         req.authUser = user
