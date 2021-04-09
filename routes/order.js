@@ -11,7 +11,7 @@ router.get('/:id?', async (req, res) => {
     const { Order } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Order.findAll({
-        where: {},
+        where: { customerId: req.authUser.id },
         order: [['name', 'ASC']],
         include: 'orderItems',
       })

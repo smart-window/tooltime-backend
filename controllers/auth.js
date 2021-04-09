@@ -10,7 +10,7 @@ const requireAuth = async (req, res, next) => {
       const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
       const user = await Customer.findOne({ where: { email } })
       if (user) {
-        req.authUser = user
+        req.authUser = user.dataValues
         next()
       } else {
         res.status(StatusCodes.UNAUTHORIZED).send('Not authorized')
