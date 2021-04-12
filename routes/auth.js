@@ -63,8 +63,8 @@ router.post('/register', async (req, res) => {
     const { Customer } = await connectToDatabase()
     const r = await Customer.create(req.body)
     const customer = await Customer.findByPk(r.id)
-    if (customer) res.send(customer)
-    else res.send({ error: 'model not found' })
+    if (customer) res.json(customer)
+    else res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
   } catch (e) {
     console.log('[POST] /auth/register.error =>', e.message)
     res.status(StatusCodes.BAD_REQUEST).send(e.message)
