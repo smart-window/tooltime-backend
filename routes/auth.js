@@ -17,7 +17,6 @@ router.post('/login', async (req, res) => {
   console.log('[POST] /auth/login =>', req.body)
   const { email, password } = req.body
   const { Customer } = await connectToDatabase()
-
   const loggedUser = await Customer.findOne({ where: { email: email } })
 
   if (!loggedUser) {
