@@ -11,6 +11,8 @@ const {
   Section,
   Order,
   OrderItem,
+  User,
+  UserLocation,
   sequelize,
 } = require('../models')
 
@@ -27,6 +29,8 @@ const Models = {
   Section,
   Order,
   OrderItem,
+  User,
+  UserLocation,
 }
 const connection = {}
 
