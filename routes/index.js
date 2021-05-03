@@ -17,6 +17,9 @@ app.use(function(req, res, next) {
   }
 })
 
+const adminRoutes = require('./admin')
+app.use('/admin', adminRoutes)
+
 const auth = require('./auth')
 app.use('/auth', auth)
 
