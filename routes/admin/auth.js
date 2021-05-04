@@ -1,7 +1,7 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 const { StatusCodes } = require('http-status-codes')
-const connectToDatabase = require('../database/index')
+const connectToDatabase = require('../../database/index')
 
 /**
  * customer login
@@ -39,3 +39,5 @@ router.post('/login', async (req, res) => {
   res.send({ accessToken: jwtToken })
   return
 })
+
+module.exports = router
