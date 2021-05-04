@@ -44,4 +44,43 @@ router.post('/login', async (req, res) => {
   }
 })
 
+router.get('/account', async (req, res) => {
+  console.log('[GET] /admin/auth/account')
+  try {
+    const { User } = await connectToDatabase()
+    const { accesstoken: accessToken } = req.headers
+
+    if (accessToken) {
+      const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
+      const user = await User.findOne({ where: { email } })
+      if (user) {
+        const responseData = {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          address: user.address,
+        }
+        responseData.accessToken = jwt.sign({ email }, process.env.AUTH_TOKEN_SECRET, {
+          expiresIn: '1d',
+        })
+        return res.send(responseData)
+      } else {
+        res.status(StatusCodes.UNAUTHORIZED).send('Not authorized')
+      }
+    } else {
+      res.status(StatusCodes.UNAUTHORIZED).send('Not authorized')
+    }
+  } catch (err) {
+    console.log('[GET] /auth/account', err)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: err.message,
+    })
+  }
+})
+
+router.get('/logout', async (req, res) => {
+  console.log('[GET] /admin/auth/logout')
+  res.send({ success: true })
+})
 module.exports = router
