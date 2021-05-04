@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        get() {
+          return () => this.getDataValue('password')
+        },
       },
       name: {
         type: DataTypes.STRING,

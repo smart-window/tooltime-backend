@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
 const { StatusCodes } = require('http-status-codes')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const connectToDatabase = require('../../database/index')
 
 /**

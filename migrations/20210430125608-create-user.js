@@ -14,6 +14,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false,
+        get() {
+          return () => this.getDataValue('password')
+        },
       },
       name: {
         type: Sequelize.STRING,
