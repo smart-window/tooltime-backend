@@ -47,12 +47,13 @@ router.post('/login', async (req, res) => {
 router.get('/account', async (req, res) => {
   console.log('[GET] /admin/auth/account')
   try {
-    const { User } = await connectToDatabase()
+    const { User, Location } = await connectToDatabase()
     const { accesstoken: accessToken } = req.headers
 
     if (accessToken) {
       const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
-      const user = await User.findOne({ where: { email } })
+      const user = await User.findOne({ where: { email }, include: Location })
+      console.log('logged user => ', user.toJSON())
       if (user) {
         const responseData = {
           id: user.id,
