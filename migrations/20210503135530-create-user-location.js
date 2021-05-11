@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      userId: {
+        type: Sequelize.STRING,
+      },
+      locationId: {
+        type: Sequelize.STRING,
+      },
       isDefault: {
         type: Sequelize.BOOLEAN,
       },

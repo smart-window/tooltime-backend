@@ -13,8 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserLocation.init(
     {
-      userId: DataTypes.String,
-      locationId: DataTypes.String,
+      userId: {
+        type: DataTypes.STRING,
+      },
+      locationId: {
+        type: DataTypes.STRING,
+      },
       isDefault: DataTypes.BOOLEAN,
     },
     {
