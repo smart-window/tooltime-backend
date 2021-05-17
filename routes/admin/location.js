@@ -1,7 +1,9 @@
 var express = require('express')
+const { StatusCodes } = require('http-status-codes')
 var router = express.Router()
 
 const connectToDatabase = require('../../database/index') // initialize connection
+
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /admin/location =>', req.body)
   try {
@@ -9,12 +11,7 @@ router.get('/:id?', async (req, res) => {
     if (!req.params.id) {
       let list
       if (req.authUser.role === 'admin') {
-        list = await Location.findAll({
-          where: {
-            active: req.params.active ? req.params.active : true,
-          },
-          order: [['name', 'ASC']],
-        })
+        list = await Location.findAll({ order: [['name', 'ASC']] })
       } else if (req.authUser.role === 'agent') {
         return req.authUser.locations
       }
@@ -22,11 +19,11 @@ router.get('/:id?', async (req, res) => {
     } else {
       const location = await Location.findByPk(req.params.id)
       if (location) res.send(location)
-      else res.send({ error: 'model not found' })
+      else res.status(StatusCodes.BAD_REQUEST).json({ message: 'Item does not exist' })
     }
   } catch (e) {
     console.log(e)
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: e.message })
   }
 })
 
@@ -40,7 +37,7 @@ router.post('/', async (req, res) => {
     else res.send({ error: 'model not found' })
   } catch (e) {
     console.log(e)
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: e.message })
   }
 })
 
@@ -55,7 +52,8 @@ router.patch('/:id', async (req, res) => {
     if (location) res.send(location)
     else res.send({ error: 'model not found' })
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: e.message })
   }
 })
 
@@ -68,7 +66,8 @@ router.delete('/:id', async (req, res) => {
       res.send({ id: destroy_res.id })
     } else res.send({ error: 'model not found' })
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: e.message })
   }
 })
 

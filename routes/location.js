@@ -26,46 +26,4 @@ router.get('/:id?', async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
-  console.log('[POST] /location =>', req.body)
-  try {
-    const { Location } = await connectToDatabase()
-    const r = await Location.create(req.body)
-    const location = await Location.findByPk(r.id)
-    if (location) res.json(location)
-    else res.send({ error: 'model not found' })
-  } catch (e) {
-    console.log(e)
-    res.send(e)
-  }
-})
-
-router.patch('/:id', async (req, res) => {
-  try {
-    const { Location } = await connectToDatabase()
-    await Location.update(req.body, {
-      where: { id: req.params.id },
-    })
-
-    const location = await Location.findByPk(req.params.id)
-    if (location) res.send(location)
-    else res.send({ error: 'model not found' })
-  } catch (e) {
-    res.send(e)
-  }
-})
-
-router.delete('/:id', async (req, res) => {
-  try {
-    const { Location } = await connectToDatabase()
-    const location = await Location.findByPk(req.params.id)
-    if (location) {
-      var destroy_res = await location.destroy()
-      res.send({ id: destroy_res.id })
-    } else res.send({ error: 'model not found' })
-  } catch (e) {
-    res.send(e)
-  }
-})
-
 module.exports = router
