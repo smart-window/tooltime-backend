@@ -35,7 +35,7 @@ const requireAdminAuth = async (req, res, next) => {
     const { User, Location } = await connectToDatabase()
     if (accessToken) {
       const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
-      const user = await User.findOne({ where: { email }, include: 'locations' })
+      const user = await User.findOne({ where: { email }, include: Location })
       console.log(user.toJSON())
       if (user) {
         req.authUser = user.toJSON()
