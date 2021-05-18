@@ -8,4 +8,7 @@ router.use('/auth', authRouter)
 const locationRouter = require('./location')
 router.use('/location', requireAdminAuth, locationRouter)
 
+const productRouter = require('./product')
+router.use('/product', requireAdminAuth, productRouter)
+
 module.exports = router
