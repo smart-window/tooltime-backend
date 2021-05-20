@@ -11,4 +11,7 @@ router.use('/location', requireAdminAuth, locationRouter)
 const productRouter = require('./product')
 router.use('/product', requireAdminAuth, productRouter)
 
+const orderRouter = require('./order')
+router.use('/order', requireAdminAuth, orderRouter)
+
 module.exports = router

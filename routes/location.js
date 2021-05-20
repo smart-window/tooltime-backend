@@ -8,9 +8,6 @@ router.get('/:id?', async (req, res) => {
     const { Location } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Location.findAll({
-        where: {
-          active: req.params.active ? req.params.active : true,
-        },
         order: [['name', 'ASC']],
       })
 

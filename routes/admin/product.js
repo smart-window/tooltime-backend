@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 
-const connectToDatabase = require('../database/index') // initialize connection
+const connectToDatabase = require('../../database/index') // initialize connection
 
 router.get('/:id?', async (req, res) => {
   try {
