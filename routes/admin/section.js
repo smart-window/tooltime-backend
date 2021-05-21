@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 const express = require('express')
 const router = express.Router()
-const connectToDatabase = require('../database/index') // initialize connection
+const connectToDatabase = require('../../database/index') // initialize connection
 
 router.get('/:id?', async (req, res) => {
   try {
@@ -32,10 +32,9 @@ router.post('/', async (req, res) => {
         id: req.body.categoryId,
       },
     })
-    const res = await Section.create(req.body)
-    if (res) {
-      const section = await Section.findByPk(res.id, { include: 'category' })
-      res.send(section)
+    const newSection = await Section.create(req.body)
+    if (newSection) {
+      res.send(newSection)
     } else res.send({ error: 'model not found' })
   } catch (e) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: e.message })
