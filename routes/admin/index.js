@@ -23,4 +23,7 @@ router.use('/category', requireAdminAuth, categoryRouter)
 const sectionRouter = require('./section')
 router.use('/section', requireAdminAuth, sectionRouter)
 
+const serviceAreaRouter = require('./serviceArea')
+router.use('/service-area', requireAdminAuth, serviceAreaRouter)
+
 module.exports = router
