@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     const r = await Servicearea.create(req.body)
     const servicearea = await Servicearea.findByPk(r.id)
     if (servicearea) res.send(servicearea)
-    else res.send({ error: 'model not found' })
+    else res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
   }
@@ -47,7 +47,7 @@ router.patch('/:id', async (req, res) => {
 
     const servicearea = await Servicearea.findByPk(req.params.id)
     if (servicearea) res.send(servicearea)
-    else res.send({ error: 'model not found' })
+    else res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'model not found' })
   } catch (e) {
     res.send(e)
   }
@@ -60,7 +60,7 @@ router.delete('/:id', async (req, res) => {
     if (servicearea) {
       var destroy_res = await servicearea.destroy()
       res.send({ id: destroy_res.id })
-    } else res.send({ error: 'model not found' })
+    } else res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
   }
