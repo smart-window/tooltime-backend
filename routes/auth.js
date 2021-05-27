@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { StatusCodes } = require('http-status-codes')
 const connectToDatabase = require('../database/index')
-// const { default: Stripe } = require('stripe')
 
 /**
  * customer login
