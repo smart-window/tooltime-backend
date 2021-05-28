@@ -9,7 +9,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
       },
       name: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       zip: { type: Sequelize.INTEGER, allowNull: false },
