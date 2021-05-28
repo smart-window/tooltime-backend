@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: false,
       },
-      homeLocationId: DataTypes.UUID,
+      locationId: DataTypes.UUID,
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
