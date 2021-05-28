@@ -3,10 +3,10 @@ const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
-    static associate({ Category, Section }) {
+    static associate({ Category, Section, ProductSection }) {
       // define association here
       this.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' })
-      this.belongsTo(Section, { foreignKey: 'sectionId', as: 'section' })
+      this.belongsToMany(Section, { through: ProductSection })
     }
   }
 
@@ -23,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       description: DataTypes.TEXT,
       categoryId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      sectionId: {
         type: DataTypes.STRING,
         allowNull: false,
       },
