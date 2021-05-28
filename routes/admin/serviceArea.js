@@ -4,6 +4,7 @@ const { StatusCodes } = require('http-status-codes')
 const connectToDatabase = require('../../database/index') // initialize connection
 
 router.get('/:id?', async (req, res) => {
+  console.log('[GET] /admin/service-area =>', req.body)
   try {
     const { Servicearea } = await connectToDatabase()
     if (!req.params.id) {
@@ -22,19 +23,21 @@ router.get('/:id?', async (req, res) => {
     }
   } catch (e) {
     console.log(e)
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
 router.post('/', async (req, res) => {
+  console.log('[POST] /admin/service-area =>', req.body)
   try {
     const { Servicearea } = await connectToDatabase()
     const r = await Servicearea.create(req.body)
     const servicearea = await Servicearea.findByPk(r.id)
     if (servicearea) res.send(servicearea)
-    else res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: 'model not found' })
+    else throw new Error('Not found')
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
@@ -47,9 +50,10 @@ router.patch('/:id', async (req, res) => {
 
     const servicearea = await Servicearea.findByPk(req.params.id)
     if (servicearea) res.send(servicearea)
-    else res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'model not found' })
+    else throw new Error('model not found')
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
@@ -60,9 +64,10 @@ router.delete('/:id', async (req, res) => {
     if (servicearea) {
       var destroy_res = await servicearea.destroy()
       res.send({ id: destroy_res.id })
-    } else res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: 'model not found' })
+    } else throw new Error('model not found')
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
