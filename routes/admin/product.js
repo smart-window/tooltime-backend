@@ -7,17 +7,17 @@ const connectToDatabase = require('../../database/index') // initialize connecti
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /admin/product =>', req.body)
   try {
-    const { Product } = await connectToDatabase()
+    const { Product, Category, Section } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Product.findAll({
         where: {},
         order: [['name', 'ASC']],
-        include: ['category', 'section'],
+        include: [Category, Section],
       })
 
       res.send(list)
     } else {
-      const product = await Product.findByPk(req.params.id, { include: ['category', 'section'] })
+      const product = await Product.findByPk(req.params.id, { include: [Category, Section] })
       if (product) res.json(product)
       else throw new Error('model not found')
     }

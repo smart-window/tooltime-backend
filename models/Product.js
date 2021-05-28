@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate({ Category, Section, ProductSection }) {
       // define association here
-      this.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' })
+      this.belongsTo(Category, { foreignKey: 'categoryId' })
       this.belongsToMany(Section, { through: ProductSection })
     }
   }
@@ -48,39 +48,4 @@ module.exports = (sequelize, DataTypes) => {
   )
 
   return Product
-  // instancemethods
-
-  // Called from Part::afterSave()
-  // obj.prototype.rollupParts = async function() {
-  //   var statusValueMap = {
-  //     onOrder: 'On Order',
-  //     available: 'Available',
-  //     picking: 'Picking',
-  //     // {status: "Waiting", description: "Part is waiting for Pickup."},
-  //     inUse: 'In Use',
-  //     shelving: 'Shelving',
-  //     outOfCirc: 'Out of Circulation',
-  //   }
-
-  //   const parts = await this.getParts()
-  //   this.getParts().then(p => {
-  //     const sums = Object.values(statusValueMap).map(val => {
-  //       return p.filter(part => {
-  //         return (
-  //           (part.active && part.status == val) || (!part.active && val == 'Out of Circulation')
-  //         )
-  //       }).length
-  //     })
-
-  //     Object.keys(statusValueMap).forEach((k, i) => {
-  //       this[k] = sums[i]
-  //     })
-
-  //     this.save()
-  //   })
-  // }
-
-  // obj.beforeCreate(obj => (obj.id = uuid.v4()))
-
-  //return obj
 }
