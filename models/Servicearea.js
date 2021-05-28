@@ -1,5 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
+const uuid = require('uuid')
 module.exports = (sequelize, DataTypes) => {
   class Servicearea extends Model {
     /**
@@ -17,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
+      },
+      name: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       zip: { type: DataTypes.INTEGER, allowNull: false },
       city: DataTypes.STRING,

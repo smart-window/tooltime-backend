@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
       },
+      name: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       zip: { type: Sequelize.INTEGER, allowNull: false },
       city: Sequelize.STRING,
       state: Sequelize.STRING,

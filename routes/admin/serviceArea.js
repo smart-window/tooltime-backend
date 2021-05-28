@@ -9,9 +9,6 @@ router.get('/:id?', async (req, res) => {
     const { Servicearea } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Servicearea.findAll({
-        where: {
-          active: req.params.active ? req.params.active : true,
-        },
         order: [['zip', 'ASC']],
       })
 
