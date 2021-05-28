@@ -1,9 +1,11 @@
 var express = require('express')
 var router = express.Router()
+const { StatusCodes } = require('http-status-codes')
 
 const connectToDatabase = require('../../database/index') // initialize connection
 
 router.get('/:id?', async (req, res) => {
+  console.log('[GET] /admin/product =>', req.body)
   try {
     const { Product } = await connectToDatabase()
     if (!req.params.id) {
@@ -17,26 +19,30 @@ router.get('/:id?', async (req, res) => {
     } else {
       const product = await Product.findByPk(req.params.id, { include: ['category', 'section'] })
       if (product) res.json(product)
-      else res.send({ error: 'model not found' })
+      else throw new Error('model not found')
     }
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
 router.post('/', async (req, res) => {
+  console.log('[POST] /admin/product =>', req.body)
   try {
     const { Product } = await connectToDatabase()
     const r = await Product.create(req.body)
     const product = await Product.findByPk(r.id, { include: ['category', 'section'] })
     if (product) res.json(product)
-    else res.send({ error: 'model not found' })
+    else throw new Error('model not found')
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
 router.patch('/:id', async (req, res) => {
+  console.log('[PATCH] /admin/product =>', req.body)
   try {
     const { Product } = await connectToDatabase()
     await Product.update(req.body, {
@@ -45,9 +51,10 @@ router.patch('/:id', async (req, res) => {
 
     const product = await Product.findByPk(req.params.id)
     if (product) res.json(product)
-    else res.send({ error: 'model not found' })
+    else throw new Error('model not found')
   } catch (e) {
-    res.send(e)
+    console.log(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
@@ -58,9 +65,9 @@ router.delete('/:id', async (req, res) => {
     if (product) {
       var destroy_res = await product.destroy()
       res.send({ id: destroy_res.id })
-    } else res.send({ error: 'model not found' })
+    } else throw new Error('model not found')
   } catch (e) {
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
