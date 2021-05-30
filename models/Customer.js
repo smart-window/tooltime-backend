@@ -49,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Customer',
+      tableName: 'customers',
       instanceMethods: {
         validPassword(password) {
           return bcrypt.compare(password, this.password())

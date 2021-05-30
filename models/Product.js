@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Product',
+      tableName: 'products',
       hooks: {
         beforeCreate: obj => {
           obj.id = uuid.v4()

@@ -36,6 +36,7 @@ module.exports = (sequelize, type) => {
     {
       sequelize,
       modelName: 'Asset',
+      tableName: 'assets',
       hooks: {
         beforeBulkUpdate: options => {
           options.individualHooks = true

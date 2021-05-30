@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Section',
+      tableName: 'sections'
     },
   )
   return Section
