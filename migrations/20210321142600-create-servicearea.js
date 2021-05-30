@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       zip: { type: Sequelize.INTEGER, allowNull: false },
       city: Sequelize.STRING,
       state: Sequelize.STRING,
@@ -25,7 +29,7 @@ module.exports = {
         allowNull: false,
         defaultValue: false,
       },
-      homeLocationId: Sequelize.UUID,
+      locationId: Sequelize.UUID,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

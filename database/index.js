@@ -13,6 +13,7 @@ const {
   OrderItem,
   User,
   UserLocation,
+  ProductSection,
   sequelize,
 } = require('../models')
 
@@ -31,6 +32,7 @@ const Models = {
   OrderItem,
   User,
   UserLocation,
+  ProductSection,
 }
 const connection = {}
 

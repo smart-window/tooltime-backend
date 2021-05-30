@@ -1,5 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
+const uuid = require('uuid')
 module.exports = (sequelize, DataTypes) => {
   class Servicearea extends Model {
     /**
@@ -18,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       zip: { type: DataTypes.INTEGER, allowNull: false },
       city: DataTypes.STRING,
       state: DataTypes.STRING,
@@ -35,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: false,
       },
-      homeLocationId: DataTypes.UUID,
+      locationId: DataTypes.UUID,
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -48,6 +53,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Servicearea',
+      tableName: 'service_area',
       hooks: {
         beforeCreate: obj => {
           obj.id = uuid.v4()
