@@ -34,7 +34,20 @@ router.post('/', async (req, res) => {
     const r = await Product.create(req.body)
     const product = await Product.findByPk(r.id, { include: ['category', 'section'] })
     if (product) res.json(product)
-    else throw new Error('model not found')
+    else res.send({ error: 'model not found' })
+    const newProduct = await Product.create(req.body)
+    if (newProduct) {
+      res.send(newProduct)
+    } else res.send({ error: 'model not found' })
+  } catch (e) {
+    res.send(e)
+  }
+})
+
+router.post('/upload', async (req, res) => {
+  try {
+    console.log(req)
+    // else throw new Error('model not found')
   } catch (e) {
     console.log(e)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
