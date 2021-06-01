@@ -44,11 +44,6 @@ router.post('/', async (req, res) => {
     const asset = await Asset.findByPk(r.id)
     if (asset) res.json(asset)
     else res.send({ error: 'model not found' })
-    console.log(req.body)
-    const newAsset = await Asset.create(req.body)
-    if (newAsset) {
-      res.send(newAsset)
-    } else res.send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
   }

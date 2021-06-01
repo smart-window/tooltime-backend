@@ -48,10 +48,6 @@ router.post('/', async (req, res) => {
     const product = await Product.findByPk(r.id, { include: ['category', 'section'] })
     if (product) res.json(product)
     else res.send({ error: 'model not found' })
-    const newProduct = await Product.create(req.body)
-    if (newProduct) {
-      res.send(newProduct)
-    } else res.send({ error: 'model not found' })
   } catch (e) {
     res.send(e)
   }
