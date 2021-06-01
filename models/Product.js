@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      sectionId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       images: {
         type: DataTypes.STRING,
       },

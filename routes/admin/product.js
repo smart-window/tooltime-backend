@@ -1,8 +1,21 @@
 var express = require('express')
 var router = express.Router()
+const multer = require('multer');
 const { StatusCodes } = require('http-status-codes')
 
 const connectToDatabase = require('../../database/index') // initialize connection
+
+// SET STORAGE
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, "product-" + Date.now() + "." + file.mimetype.split("/")[1])
+  }
+})
+
+const upload = multer({ storage: storage })
 
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /admin/product =>', req.body)
@@ -44,14 +57,15 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.post('/upload', async (req, res) => {
-  try {
-    console.log(req)
-    // else throw new Error('model not found')
-  } catch (e) {
-    console.log(e)
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
+router.post('/upload', upload.single('image'), (req, res, next) => {
+  console.log(res.file)
+  const file = req.file
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    return next(error)
   }
+  res.send(file)
 })
 
 router.patch('/:id', async (req, res) => {

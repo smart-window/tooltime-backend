@@ -1,26 +1,27 @@
 var express = require('express')
+const { StatusCodes } = require('http-status-codes')
 var router = express.Router()
 
 const connectToDatabase = require('../database/index') // initialize connection
 
 router.get('/:id?', async (req, res) => {
   try {
-    const { Product } = await connectToDatabase()
+    const { Product, Category, Section } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Product.findAll({
         where: {},
         order: [['name', 'ASC']],
-        include: ['category', 'section'],
+        include: [Category, Section],
       })
 
       res.send(list)
     } else {
-      const product = await Product.findByPk(req.params.id, { include: ['category', 'section'] })
+      const product = await Product.findByPk(req.params.id, { include: [Category, Section] })
       if (product) res.json(product)
-      else res.send({ error: 'model not found' })
+      else res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: 'model not found' })
     }
   } catch (e) {
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 
