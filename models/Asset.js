@@ -32,50 +32,17 @@ module.exports = (sequelize, type) => {
       statusDescription: type.TEXT,
       description: type.TEXT,
       active: type.BOOLEAN,
+      productId: type.STRING,
+      locationId: type.STRING,
+      images: type.TEXT,
     },
     {
       sequelize,
       modelName: 'Asset',
       tableName: 'assets',
       hooks: {
-        beforeBulkUpdate: options => {
-          options.individualHooks = true
-        },
-        afterBulkUpdate: options => {
-          options.individualHooks = false
-        },
-
         beforeCreate: obj => {
-          obj.beforeCreate(obj => (obj.id = uuid.v4()))
-        },
-
-        afterSave: o => {
-          console.log('In Part::afterSave()')
-          // console.log(o)
-
-          // Deal with changed productId
-          // changed() only returns true on an update
-          if (o.changed('productId')) {
-            const prevProductId = o.previous('productId')
-            if (prevProductId) {
-              o.sequelize.models.Product.findByPk(prevProductId).then(p => {
-                if (p) p.rollupParts()
-              })
-            }
-          }
-
-          if (o.isNewRecord || o.changed('status') || o.changed('active')) {
-            // Rollup current Product
-            return o.getProduct().then(p => {
-              if (p) p.rollupParts()
-            })
-          }
-        },
-
-        afterDestroy: o => {
-          return o.getProduct().then(p => {
-            if (p) p.rollupParts()
-          })
+          obj.id = uuid.v4()
         },
       },
     },

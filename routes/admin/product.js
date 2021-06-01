@@ -58,7 +58,6 @@ router.post('/', async (req, res) => {
 })
 
 router.post('/upload', upload.single('image'), (req, res, next) => {
-  console.log(res.file)
   const file = req.file
   if (!file) {
     const error = new Error('Please upload a file')
