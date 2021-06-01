@@ -65,7 +65,9 @@ router.post('/upload', upload.single('image'), (req, res, next) => {
     error.httpStatusCode = 400
     return next(error)
   }
-  res.send(file)
+
+  const fullPath = req.protocol + "://" + req.headers.host + '/' + req.file.path
+  res.send({ fullPath })
 })
 
 router.patch('/:id', async (req, res) => {

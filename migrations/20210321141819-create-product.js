@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
       },
       images: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
       available: DataTypes.INTEGER,
       picking: DataTypes.INTEGER,
