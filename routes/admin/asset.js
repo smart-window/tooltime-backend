@@ -18,21 +18,22 @@ const upload = multer({ storage: storage })
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /admin/asset =>', req.body)
   try {
-    const { Asset } = await connectToDatabase()
+    const { Asset, Product, Location } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Asset.findAll({
         where: {},
         order: [['name', 'ASC']],
+        include: [Product, Location],
       })
 
       res.send(list)
     } else {
-      const asset = await Asset.findByPk(req.params.id)
+      const asset = await Asset.findByPk(req.params.id, { include: [Product, Location] })
       if (asset) res.send(asset)
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: e.message })
   }
 })
 

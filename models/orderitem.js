@@ -32,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       orderCount: {
-        // Foreign Key ----> Product
         type: DataTypes.INTEGER,
         allowNull: false,
       },
