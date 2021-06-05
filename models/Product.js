@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(Category, { foreignKey: 'categoryId' })
       this.belongsTo(Section, { foreignKey: 'sectionId' })
-      // this.belongsToMany(Section, { through: ProductSection })
     }
   }
 

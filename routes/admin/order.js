@@ -8,11 +8,11 @@ const { StatusCodes } = require('http-status-codes')
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /order =>', req.params)
   try {
-    const { Order } = await connectToDatabase()
+    const { Order, OrderItem, Customer, Location } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Order.findAll({
         order: [['name', 'ASC']],
-        include: 'orderItems',
+        include: [OrderItem, Customer, Location],
       })
       res.send(list)
     } else {
@@ -21,18 +21,17 @@ router.get('/:id?', async (req, res) => {
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
-    console.log(e)
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: e.message })
   }
 })
 
 router.post('/', async (req, res) => {
   console.log('[POST] /order =>', req.body)
   try {
-    const { Order } = await connectToDatabase()
+    const { Order, OrderItem, Customer } = await connectToDatabase()
     const newOrderRequest = _.cloneDeep(req.body)
     newOrderRequest.status = ORDER_STATUS.PENDING
-    const r = await Order.create(newOrderRequest, { include: 'orderItems' })
+    const r = await Order.create(newOrderRequest, { include: [OrderItem, Customer] })
     const order = await Order.findByPk(r.id)
     if (order) res.json(order)
     else res.send({ error: 'model not found' })

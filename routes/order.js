@@ -8,38 +8,36 @@ const { StatusCodes } = require('http-status-codes')
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /order =>', req.params)
   try {
-    const { Order } = await connectToDatabase()
+    const { Order, OrderItem } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Order.findAll({
         where: { customerId: req.authUser.id },
         order: [['name', 'ASC']],
-        include: 'orderItems',
+        include: [OrderItem],
       })
 
       res.send(list)
     } else {
-      const order = await Order.findByPk(req.params.id, { include: 'orderItems' })
+      const order = await Order.findByPk(req.params.id, { include: [OrderItem] })
       if (order) res.send(order)
       else res.send({ error: 'model not found' })
     }
   } catch (e) {
-    console.log(e)
-    res.send(e)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: e.message })
   }
 })
 
 router.post('/', async (req, res) => {
   console.log('[POST] /order =>', req.body)
   try {
-    const { Order } = await connectToDatabase()
+    const { Order, OrderItem } = await connectToDatabase()
     const newOrderRequest = _.cloneDeep(req.body)
     newOrderRequest.status = ORDER_STATUS.PENDING
-    const r = await Order.create(newOrderRequest, { include: 'orderItems' })
+    const r = await Order.create(newOrderRequest, { include: [OrderItem] })
     const order = await Order.findByPk(r.id)
     if (order) res.json(order)
     else res.send({ error: 'model not found' })
   } catch (e) {
-    console.log(e)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: e.message })
   }
 })
@@ -71,7 +69,7 @@ router.patch('/:id', async (req, res) => {
       if (orderItem.id === undefined) await OrderItem.create(orderItem)
       else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
     }
-    const order = await Order.findByPk(req.params.id, { include: 'orderItems' })
+    const order = await Order.findByPk(req.params.id, { include: [OrderItem] })
     if (order) res.json(order)
     else res.send({ error: 'model not found' })
   } catch (e) {
