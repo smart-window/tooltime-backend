@@ -12,7 +12,7 @@ router.get('/:id?', async (req, res) => {
     if (!req.params.id) {
       const list = await Order.findAll({
         order: [['name', 'ASC']],
-        include: [{model: OrderItem, include: [{model: Product, include: [Asset]}]}, Customer, Location],
+        include: [{ model: OrderItem, include: [{ model: Product, include: [{ model: Asset, include: [Location] }] }] }, Customer, Location],
       })
       res.send(list)
     } else {
