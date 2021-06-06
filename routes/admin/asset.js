@@ -50,6 +50,19 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.post('/set_asset', async (req, res) => {
+  console.log('[POST] /admin/asset/set_asset =>', req.body)
+  try {
+    const { Asset } = await connectToDatabase()
+    const r = await Asset.update(req.body)
+    const asset = await Asset.findByPk(r.id)
+    // if (asset) res.json(asset)
+    // else res.send({ error: 'model not found' })
+  } catch (e) {
+    res.send(e)
+  }
+})
+
 router.post('/upload', upload.single('image'), (req, res, next) => {
   const file = req.file
   if (!file) {

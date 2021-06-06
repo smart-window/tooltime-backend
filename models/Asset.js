@@ -32,6 +32,7 @@ module.exports = (sequelize, type) => {
       productId: type.STRING,
       locationId: type.STRING,
       images: type.TEXT,
+      orderItemId: type.TEXT,
     },
     {
       sequelize,
