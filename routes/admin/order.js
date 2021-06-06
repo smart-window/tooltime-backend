@@ -16,7 +16,10 @@ router.get('/:id?', async (req, res) => {
       })
       res.send(list)
     } else {
-      const order = await Order.findByPk(req.params.id, { include: [OrderItem] })
+      const order = await Order.findByPk(
+        req.params.id, { 
+          include: [{ model: OrderItem, include: [{ model: Product, include: [{ model: Asset, include: [Location] }] }] }, Customer, Location],
+        })
       // const orderItem = await OrderItem.findByPk(order.params.id, { include: [OrderItem] })
       if (order) res.send(order)
       else res.send({ error: 'model not found' })
