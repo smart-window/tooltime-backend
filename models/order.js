@@ -51,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
       notes: {
         type: DataTypes.STRING,
       },
+      zip: {
+        type: DataTypes.STRING,
+      },
       status: {
         type: DataTypes.ENUM({
           values: ['PENDING', 'PICKED', 'DELIVERED', 'RETURNED', 'EXPIRED'],

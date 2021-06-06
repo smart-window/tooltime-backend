@@ -8,15 +8,16 @@ const { StatusCodes } = require('http-status-codes')
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /order =>', req.params)
   try {
-    const { Order, OrderItem, Customer, Location } = await connectToDatabase()
+    const { Order, OrderItem, Customer, Location, Product, Asset } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Order.findAll({
         order: [['name', 'ASC']],
-        include: [OrderItem, Customer, Location],
+        include: [{model: OrderItem, include: [{model: Product, include: [Asset]}]}, Customer, Location],
       })
       res.send(list)
     } else {
-      const order = await Order.findByPk(req.params.id, { include: 'orderItems' })
+      const order = await Order.findByPk(req.params.id, { include: [OrderItem] })
+      // const orderItem = await OrderItem.findByPk(order.params.id, { include: [OrderItem] })
       if (order) res.send(order)
       else res.send({ error: 'model not found' })
     }
