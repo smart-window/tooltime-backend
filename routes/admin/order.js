@@ -68,12 +68,12 @@ router.patch('/:id', async (req, res) => {
     await Order.update(req.body, {
       where: { id: req.params.id },
     })
-    if (req.body.orderItems) {
+    // if ('orderItems' in req.body) {
       for (orderItem of req.body.orderItems) {
         if (orderItem.id === undefined) await OrderItem.create(orderItem)
         else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
       }
-    }
+    // }
     const order = await Order.findByPk(req.params.id, { include: OrderItem })
     if (order) res.json(order)
     else res.send({ error: 'model not found' })

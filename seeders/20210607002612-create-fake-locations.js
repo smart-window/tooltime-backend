@@ -8,7 +8,7 @@ module.exports = {
       'locations',
       [
         {
-          id: uuid.v4(),
+          id: '1f5f556f-bf1d-492a-bc71-088ab8bae559',
           name: 'New York 1',
           address_1:'27 W 36th St',
           city:'New York',
@@ -18,7 +18,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: uuid.v4(),
+          id: '1f5f556f-bf1d-492a-bc71-088ab8bae560',
           name: 'New York 2',
           address_1:'255 W 44th St',
           city:'New York',
@@ -28,7 +28,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: uuid.v4(),
+          id: '1f5f556f-bf1d-492a-bc71-088ab8bae561',
           name: 'Texas 1',
           address_1:'1918 Cadiz St',
           city:'Dallas',
@@ -38,7 +38,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: uuid.v4(),
+          id: '1f5f556f-bf1d-492a-bc71-088ab8bae562',
           name: 'Texas 2',
           address_1:'608 S Pearl Expy',
           city:'Dallas',
@@ -48,7 +48,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: uuid.v4(),
+          id: '1f5f556f-bf1d-492a-bc71-088ab8bae563',
           name: 'California 1',
           address_1:'1866 Turk Blvd',
           city:'San Francisco',
@@ -59,7 +59,7 @@ module.exports = {
         },
       ],
       {},
-    )
+      )
   },
 
   down: async (queryInterface, Sequelize) => {
