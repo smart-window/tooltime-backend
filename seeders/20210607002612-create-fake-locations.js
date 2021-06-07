@@ -5,45 +5,55 @@ const uuid = require('uuid');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
-      'customers',
+      'locations',
       [
         {
           id: uuid.v4(),
-          name: 'User 1',
-          email: 'user1@gmail.com',
-          password: bcrypt.hashSync('user', bcrypt.genSaltSync(8)),
+          name: 'New York 1',
+          address_1:'27 W 36th St',
+          city:'New York',
+          state: 'NY',
+          zip: '10018',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: uuid.v4(),
-          name: 'User 2',
-          email: 'user2@gmail.com',
-          password: bcrypt.hashSync('user', bcrypt.genSaltSync(8)),
+          name: 'New York 2',
+          address_1:'255 W 44th St',
+          city:'New York',
+          state: 'NY',
+          zip: '10036',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: uuid.v4(),
-          name: 'User 3',
-          email: 'user3@gmail.com',
-          password: bcrypt.hashSync('user', bcrypt.genSaltSync(8)),
+          name: 'Texas 1',
+          address_1:'1918 Cadiz St',
+          city:'Dallas',
+          state: 'TX',
+          zip: '75201',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: uuid.v4(),
-          name: 'User 4',
-          email: 'user4@gmail.com',
-          password: bcrypt.hashSync('user', bcrypt.genSaltSync(8)),
+          name: 'Texas 2',
+          address_1:'608 S Pearl Expy',
+          city:'Dallas',
+          state: 'TX',
+          zip: '75201',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: uuid.v4(),
-          name: 'User 5',
-          email: 'user5@gmail.com',
-          password: bcrypt.hashSync('user', bcrypt.genSaltSync(8)),
+          name: 'California 1',
+          address_1:'1866 Turk Blvd',
+          city:'San Francisco',
+          state: 'CA',
+          zip: '94115',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -53,6 +63,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkDelete('customers', null, {});
+     await queryInterface.bulkDelete('locations', null, {});
   }
 };

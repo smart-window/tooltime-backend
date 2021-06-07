@@ -17,9 +17,9 @@ router.get('/:id?', async (req, res) => {
       res.send(list)
     } else {
       const order = await Order.findByPk(
-        req.params.id, { 
-          include: [{ model: OrderItem, include: [{ model: Product, include: [{ model: Asset, include: [Location] }] }] }, Customer, Location],
-        })
+        req.params.id, {
+        include: [{ model: OrderItem, include: [{ model: Product, include: [{ model: Asset, include: [Location] }] }] }, Customer, Location],
+      })
       // const orderItem = await OrderItem.findByPk(order.params.id, { include: [OrderItem] })
       if (order) res.send(order)
       else res.send({ error: 'model not found' })
@@ -68,11 +68,13 @@ router.patch('/:id', async (req, res) => {
     await Order.update(req.body, {
       where: { id: req.params.id },
     })
-    for (orderItem of req.body.orderItems) {
-      if (orderItem.id === undefined) await OrderItem.create(orderItem)
-      else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
+    if (req.body.orderItems) {
+      for (orderItem of req.body.orderItems) {
+        if (orderItem.id === undefined) await OrderItem.create(orderItem)
+        else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
+      }
     }
-    const order = await Order.findByPk(req.params.id, { include: 'orderItems' })
+    const order = await Order.findByPk(req.params.id, { include: OrderItem })
     if (order) res.json(order)
     else res.send({ error: 'model not found' })
   } catch (e) {
