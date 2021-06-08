@@ -6,10 +6,11 @@ const connectToDatabase = require('../../database/index') // initialize connecti
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /admin/service-area =>', req.body)
   try {
-    const { Servicearea } = await connectToDatabase()
+    const { Servicearea, Location } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Servicearea.findAll({
         order: [['zip', 'ASC']],
+        include: [Location]
       })
 
       res.send(list)

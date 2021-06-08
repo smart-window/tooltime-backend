@@ -10,221 +10,125 @@ module.exports = {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca591',
           categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
           sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
-          name: '2200 WATT PORTABLE INVERTER GENERATOR',
+          name: 'AIR COMPRESSOR',
           description:
-          'CO Protect Technology – Stops. Alerts. Saves. Powerful protection against hazardous carbon monoxide.',
+            'With industry-leading 2-stage performance, the durable DEWALT 20 gal. belt drive air compressor is the ideal choice for tackling a variety of tasks. This tool was built for routine professional use with 200 maximum psi, which provides 53% more air tool run time versus 20 gal. 155 psi compressors. At 78 dBA, you’ll be able to work in a quieter environment with its oil-lubricated twin cylinder pump and cast iron construction. Transport this compressor with ease using the 10 in. pneumatic wheels on jobsites inside your garage, or at the shop. The DEWALT 25 gal. 200 psi air compressor is perfect for light automotive tasks, medium-duty metal working, and agricultural equipment repairs.',
           images:
-          'https://generatorbible.com/wp-content/uploads/Dewalt-DXGNi2200-1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW079LRK/DW079LRK_K1.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DXCM201/DXCM201_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXCM201/DXCM201_F1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXCM201/DXCM201_2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXCM201/DXCM201_3.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXCM201/DXCM201_F4.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca592',
           categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
-          name: '4000 WATT PORTABLE GAS GENERATOR',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
+          name: 'CARRY COMPRESSOR',
           description:
-          'The 4000 Watt Portable Gas Generator is powered by a 223cc engine with low oil shut off which protects the engine from damage. CO-Protect Technology automatically shuts down the generator if carbon monoxide levels become unsafe or rapidly increase. This generator is equipped with covered outlets to help protect it from even the toughest jobsites and features heavy duty wheels for transportation and durability. The 3.4 Gal. steel fuel tank provides up to 10 hours of runtime at 50% load. The 1 ¼” steel tube frame helps protect it from jobsite conditions.',
+            '',
           images:
-          'https://cdn11.bigcommerce.com/s-qjun8/images/stencil/1280x1280/products/2340/2647/115-dg6300b__20691.1416725965.jpg?c=2,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNR4000/DXGNR4000_2.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/D55151/D55151_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/D55151/D55151_F1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/D55151/D55151_F2.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca593',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356902',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f03',
-          name: '20V MAX* TOOL CONNECT™ GREEN TOUGH ROTARY LASER KIT',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
+          name: 'SANDER',
           description:
-          'With an IP67 debris/water resistance rating, 1 meter drop protection, and a visible red beam, the 20V MAX* Tool Connect™ Green Rotary Tough laser equips users to work in the toughest conditions. Connect this rotary to our Tool Connect™ app to track the device, and receive bump, fall, and drop indications, as well as slope and line direction.',
+            'The Pneumatic Palm Sander features 12000 RPMs for professional quality sanding. The touch control trigger allows the user to apply needed amount of power when prepping surfaces for paint jobs. The stick on pad provides convenience and saves times as it allows the user to quickly change pads',
           images:
-          'https://www.dewalt.com/NA/product/images/3000x3000x96/DW080LGSK/DW080LGSK_K2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNI2200/DXGNI2200_A1.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70781L/DWMT70781L_1.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca594',
           categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
-          name: '2200 WATT PORTABLE INVERTER GENERATOR',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
+          name: 'GRINDER',
           description:
-          'CO Protect Technology – Stops. Alerts. Saves. Powerful protection against hazardous carbon monoxide.',
+            'The 1/4" Angle Die Grinder features a lightweight aluminum body with an ergonomically designed cushion grip for user comfort. It features a touch control trigger with a self-locking throttle to provide protection from accidental start ups.',
           images:
-          'https://generatorbible.com/wp-content/uploads/Dewalt-DXGNi2200-1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW079LRK/DW079LRK_K1.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70782L/DWMT70782L_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70782L/DWMT70782L_A1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70782L/DWMT70782L_2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70782L/DWMT70782L_A2.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca595',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
-          name: '4000 WATT PORTABLE GAS GENERATOR',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356901',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f03',
+          name: 'CUTTING WHEELS',
           description:
-          'The 4000 Watt Portable Gas Generator is powered by a 223cc engine with low oil shut off which protects the engine from damage. CO-Protect Technology automatically shuts down the generator if carbon monoxide levels become unsafe or rapidly increase. This generator is equipped with covered outlets to help protect it from even the toughest jobsites and features heavy duty wheels for transportation and durability. The 3.4 Gal. steel fuel tank provides up to 10 hours of runtime at 50% load. The 1 ¼” steel tube frame helps protect it from jobsite conditions.',
+            'Built for long life, users can continuously expose sharp edges with these High-Performance Aluminum Cutting Wheels’ quick-fracturing grains. The wheels are optimized for cutting copper, tin, zinc, brass, aluminum, and other non-iron metals. Extend wheel life and routinely make clean cuts with a unique polymer blend that reduces frictional heat for minimized loading. Reduce wheel cracking and splitting with 2 built-in sheets of fiberglass for optimized strength.',
           images:
-          'https://cdn11.bigcommerce.com/s-qjun8/images/stencil/1280x1280/products/2340/2647/115-dg6300b__20691.1416725965.jpg?c=2,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNR4000/DXGNR4000_2.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DW8062A/DW8062A_1.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca596',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356902',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356901',
           sectionId: '035b7535-52a7-4699-a7cb-3c604c890f03',
-          name: '20V MAX* TOOL CONNECT™ GREEN TOUGH ROTARY LASER KIT',
+          name: 'DIAMOND BLADE',
           description:
-          'With an IP67 debris/water resistance rating, 1 meter drop protection, and a visible red beam, the 20V MAX* Tool Connect™ Green Rotary Tough laser equips users to work in the toughest conditions. Connect this rotary to our Tool Connect™ app to track the device, and receive bump, fall, and drop indications, as well as slope and line direction.',
+            'Engineered to cut concrete, brick, and block with sintered diamond* segments, this high-performance blade is ideal for the toughest tasks. Its diamond construction lets you efficiently tackle work and increase productivity by quickly removing material as you cut. Get accurate cuts and minimal deflection with this blade’s premium-strength steel core.',
           images:
-          'https://www.dewalt.com/NA/product/images/3000x3000x96/DW080LGSK/DW080LGSK_K2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNI2200/DXGNI2200_A1.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DW47410/DW47410_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW47410/DW47410_F1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW47410/DW47410_F2.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca597',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
-          name: '2200 WATT PORTABLE INVERTER GENERATOR',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356901',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f04',
+          name: 'LITHIUM ION BATTERY',
           description:
-          'CO Protect Technology – Stops. Alerts. Saves. Powerful protection against hazardous carbon monoxide.',
+            'Get the highest capacity within the DEWALT® 20V MAX* XR® lineup with this DCB210 10.0Ah Lithium Ion Battery. This battery provides optimized runtime using state-of-the-art technology. Compatible with our new XR® Power Detect™ line of tools that adjust output based on power source, the battery delivers maximum performance to get the job done. Eliminate unplanned stops with an included LED Fuel Gauge charge indicator for added convenience.',
           images:
-          'https://generatorbible.com/wp-content/uploads/Dewalt-DXGNi2200-1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW079LRK/DW079LRK_K1.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DCB210/DCB210_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DCB210/DCB210_2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DCB210/DCB210_3.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca598',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
-          name: '4000 WATT PORTABLE GAS GENERATOR',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356901',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f04',
+          name: 'FAST CHARGER',
           description:
-          'The 4000 Watt Portable Gas Generator is powered by a 223cc engine with low oil shut off which protects the engine from damage. CO-Protect Technology automatically shuts down the generator if carbon monoxide levels become unsafe or rapidly increase. This generator is equipped with covered outlets to help protect it from even the toughest jobsites and features heavy duty wheels for transportation and durability. The 3.4 Gal. steel fuel tank provides up to 10 hours of runtime at 50% load. The 1 ¼” steel tube frame helps protect it from jobsite conditions.',
+            'This charger is a four-port fast charger that charges 12V MAX*, 20V MAX*, and FLEXVOLT® 20V/60V MAX* batteries at the same time. This fast charger quickly charges a 4.0Ah 20V MAX* battery in 40 minutes, and a 6.0Ah 20V MAX* battery in 60 minutes. It is also designed to fit our Tool Connect™ Tag, and is ToughSystem™ compatible.',
           images:
-          'https://cdn11.bigcommerce.com/s-qjun8/images/stencil/1280x1280/products/2340/2647/115-dg6300b__20691.1416725965.jpg?c=2,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNR4000/DXGNR4000_2.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DCB104/DCB104_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DCB104/DCB104_A1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DCB104/DCB104_F1.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca599',
           categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356902',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f03',
-          name: '20V MAX* TOOL CONNECT™ GREEN TOUGH ROTARY LASER KIT',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f05',
+          name: 'HAMMER',
           description:
-          'With an IP67 debris/water resistance rating, 1 meter drop protection, and a visible red beam, the 20V MAX* Tool Connect™ Green Rotary Tough laser equips users to work in the toughest conditions. Connect this rotary to our Tool Connect™ app to track the device, and receive bump, fall, and drop indications, as well as slope and line direction.',
+            'This 4 lb. Fiberglass Blacksmith Hammer is built tough with a forged steel body, great for metalworking or shaping. The durable handle is created with lightweight fiberglass and has overstrike protection to reinforce where handles break most. It also has an over-mold textured grip to help improve comfort and control of the tool.',
           images:
-          'https://www.dewalt.com/NA/product/images/3000x3000x96/DW080LGSK/DW080LGSK_K2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNI2200/DXGNI2200_A1.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT56147/DWHT56147_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT56147/DWHT56147_P1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT56147/DWHT56147_2.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca600',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
-          name: '2200 WATT PORTABLE INVERTER GENERATOR',
-          description:
-          'CO Protect Technology – Stops. Alerts. Saves. Powerful protection against hazardous carbon monoxide.',
-          images:
-          'https://generatorbible.com/wp-content/uploads/Dewalt-DXGNi2200-1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW079LRK/DW079LRK_K1.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca601',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
-          name: '4000 WATT PORTABLE GAS GENERATOR',
-          description:
-          'The 4000 Watt Portable Gas Generator is powered by a 223cc engine with low oil shut off which protects the engine from damage. CO-Protect Technology automatically shuts down the generator if carbon monoxide levels become unsafe or rapidly increase. This generator is equipped with covered outlets to help protect it from even the toughest jobsites and features heavy duty wheels for transportation and durability. The 3.4 Gal. steel fuel tank provides up to 10 hours of runtime at 50% load. The 1 ¼” steel tube frame helps protect it from jobsite conditions.',
-          images:
-          'https://cdn11.bigcommerce.com/s-qjun8/images/stencil/1280x1280/products/2340/2647/115-dg6300b__20691.1416725965.jpg?c=2,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNR4000/DXGNR4000_2.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca602',
           categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356902',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f03',
-          name: '20V MAX* TOOL CONNECT™ GREEN TOUGH ROTARY LASER KIT',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f05',
+          name: 'CLAW BAR',
           description:
-          'With an IP67 debris/water resistance rating, 1 meter drop protection, and a visible red beam, the 20V MAX* Tool Connect™ Green Rotary Tough laser equips users to work in the toughest conditions. Connect this rotary to our Tool Connect™ app to track the device, and receive bump, fall, and drop indications, as well as slope and line direction.',
+            'The 12 in. precision claw bar is constructed with an i-beam design for durability. Use this pry bar to dig and remove embedded nails easily with the pointed beveled end. It also includes a nail digging feature for striking and creating access to recessed nails.',
           images:
-          'https://www.dewalt.com/NA/product/images/3000x3000x96/DW080LGSK/DW080LGSK_K2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNI2200/DXGNI2200_A1.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca603',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
-          name: '2200 WATT PORTABLE INVERTER GENERATOR',
-          description:
-          'CO Protect Technology – Stops. Alerts. Saves. Powerful protection against hazardous carbon monoxide.',
-          images:
-          'https://generatorbible.com/wp-content/uploads/Dewalt-DXGNi2200-1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW079LRK/DW079LRK_K1.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca604',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
-          name: '4000 WATT PORTABLE GAS GENERATOR',
-          description:
-          'The 4000 Watt Portable Gas Generator is powered by a 223cc engine with low oil shut off which protects the engine from damage. CO-Protect Technology automatically shuts down the generator if carbon monoxide levels become unsafe or rapidly increase. This generator is equipped with covered outlets to help protect it from even the toughest jobsites and features heavy duty wheels for transportation and durability. The 3.4 Gal. steel fuel tank provides up to 10 hours of runtime at 50% load. The 1 ¼” steel tube frame helps protect it from jobsite conditions.',
-          images:
-          'https://cdn11.bigcommerce.com/s-qjun8/images/stencil/1280x1280/products/2340/2647/115-dg6300b__20691.1416725965.jpg?c=2,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNR4000/DXGNR4000_2.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca605',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356902',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f03',
-          name: '20V MAX* TOOL CONNECT™ GREEN TOUGH ROTARY LASER KIT',
-          description:
-          'With an IP67 debris/water resistance rating, 1 meter drop protection, and a visible red beam, the 20V MAX* Tool Connect™ Green Rotary Tough laser equips users to work in the toughest conditions. Connect this rotary to our Tool Connect™ app to track the device, and receive bump, fall, and drop indications, as well as slope and line direction.',
-          images:
-          'https://www.dewalt.com/NA/product/images/3000x3000x96/DW080LGSK/DW080LGSK_K2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNI2200/DXGNI2200_A1.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca606',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
-          name: '2200 WATT PORTABLE INVERTER GENERATOR',
-          description:
-          'CO Protect Technology – Stops. Alerts. Saves. Powerful protection against hazardous carbon monoxide.',
-          images:
-          'https://generatorbible.com/wp-content/uploads/Dewalt-DXGNi2200-1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DW079LRK/DW079LRK_K1.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca607',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
-          name: '4000 WATT PORTABLE GAS GENERATOR',
-          description:
-          'The 4000 Watt Portable Gas Generator is powered by a 223cc engine with low oil shut off which protects the engine from damage. CO-Protect Technology automatically shuts down the generator if carbon monoxide levels become unsafe or rapidly increase. This generator is equipped with covered outlets to help protect it from even the toughest jobsites and features heavy duty wheels for transportation and durability. The 3.4 Gal. steel fuel tank provides up to 10 hours of runtime at 50% load. The 1 ¼” steel tube frame helps protect it from jobsite conditions.',
-          images:
-          'https://cdn11.bigcommerce.com/s-qjun8/images/stencil/1280x1280/products/2340/2647/115-dg6300b__20691.1416725965.jpg?c=2,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNR4000/DXGNR4000_2.jpg',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca608',
-          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356902',
-          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f03',
-          name: '20V MAX* TOOL CONNECT™ GREEN TOUGH ROTARY LASER KIT',
-          description:
-          'With an IP67 debris/water resistance rating, 1 meter drop protection, and a visible red beam, the 20V MAX* Tool Connect™ Green Rotary Tough laser equips users to work in the toughest conditions. Connect this rotary to our Tool Connect™ app to track the device, and receive bump, fall, and drop indications, as well as slope and line direction.',
-          images:
-          'https://www.dewalt.com/NA/product/images/3000x3000x96/DW080LGSK/DW080LGSK_K2.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DXGNI2200/DXGNI2200_A1.jpg',
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT55166/DWHT55166_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT55166/DWHT55166_P1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT55166/DWHT55166_A1.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
       ],
       {},
-      )
+    )
   },
 
   down: async (queryInterface, Sequelize) => {

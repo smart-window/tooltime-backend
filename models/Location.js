@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ User, UserLocation }) {
+    static associate({ User, UserLocation, Servicearea }) {
       // define association here
       this.belongsToMany(User, { through: UserLocation })
+      this.hasMany(Servicearea, { foreignKey: 'locationId' })
     }
   }
   Location.init(
