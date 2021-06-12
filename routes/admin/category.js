@@ -5,13 +5,13 @@ const connectToDatabase = require('../../database/index') // initialize connecti
 
 router.get('/:id?', async (req, res) => {
   try {
-    const { Category } = await connectToDatabase()
+    const { Category, Section, Product } = await connectToDatabase()
 
     if (!req.params.id) {
       const list = await Category.findAll({
         where: {},
         order: [['name', 'ASC']],
-        include: 'sections',
+        include: [{ model: Section, as: 'sections' }, { model: Product }]
       })
 
       res.send(list)
