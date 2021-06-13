@@ -33,8 +33,13 @@ router.post('/', async (req, res) => {
     const { Order, OrderItem } = await connectToDatabase()
     const newOrderRequest = _.cloneDeep(req.body)
     newOrderRequest.status = ORDER_STATUS.PENDING
-    const r = await Order.create(newOrderRequest, { include: [OrderItem] })
+    const r = await Order.create(newOrderRequest)
     const order = await Order.findByPk(r.id)
+    for (orderItem of req.body.orderItems) {
+      orderItem.orderId = order.id
+      if (orderItem.id === undefined) await OrderItem.create(orderItem)
+      else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
+    }
     if (order) res.json(order)
     else res.send({ error: 'model not found' })
   } catch (e) {
@@ -66,6 +71,7 @@ router.patch('/:id', async (req, res) => {
       where: { id: req.params.id },
     })
     for (orderItem of req.body.orderItems) {
+      console.log(orderItem)
       if (orderItem.id === undefined) await OrderItem.create(orderItem)
       else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
     }
