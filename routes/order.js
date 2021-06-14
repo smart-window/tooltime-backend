@@ -8,12 +8,12 @@ const { StatusCodes } = require('http-status-codes')
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /order =>', req.params)
   try {
-    const { Order, OrderItem } = await connectToDatabase()
+    const { Order, OrderItem, Product } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Order.findAll({
         where: { customerId: req.authUser.id },
         order: [['name', 'ASC']],
-        include: [OrderItem],
+        include: [{model: OrderItem, include:[Product]}],
       })
 
       res.send(list)
