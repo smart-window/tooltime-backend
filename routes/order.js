@@ -70,8 +70,7 @@ router.patch('/:id', async (req, res) => {
     await Order.update(req.body, {
       where: { id: req.params.id },
     })
-    for (orderItem of req.body.orderItems) {
-      console.log(orderItem)
+    for (orderItem of req.body.OrderItems) {
       if (orderItem.id === undefined) await OrderItem.create(orderItem)
       else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
     }
