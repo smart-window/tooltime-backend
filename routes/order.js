@@ -8,12 +8,12 @@ const { StatusCodes } = require('http-status-codes')
 router.get('/:id?', async (req, res) => {
   console.log('[GET] /order =>', req.params)
   try {
-    const { Order, OrderItem } = await connectToDatabase()
+    const { Order, OrderItem, Product } = await connectToDatabase()
     if (!req.params.id) {
       const list = await Order.findAll({
         where: { customerId: req.authUser.id },
         order: [['name', 'ASC']],
-        include: [OrderItem],
+        include: [{model: OrderItem, include:[Product]}],
       })
 
       res.send(list)
@@ -33,8 +33,13 @@ router.post('/', async (req, res) => {
     const { Order, OrderItem } = await connectToDatabase()
     const newOrderRequest = _.cloneDeep(req.body)
     newOrderRequest.status = ORDER_STATUS.PENDING
-    const r = await Order.create(newOrderRequest, { include: [OrderItem] })
+    const r = await Order.create(newOrderRequest)
     const order = await Order.findByPk(r.id)
+    for (orderItem of req.body.orderItems) {
+      orderItem.orderId = order.id
+      if (orderItem.id === undefined) await OrderItem.create(orderItem)
+      else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
+    }
     if (order) res.json(order)
     else res.send({ error: 'model not found' })
   } catch (e) {
@@ -65,7 +70,7 @@ router.patch('/:id', async (req, res) => {
     await Order.update(req.body, {
       where: { id: req.params.id },
     })
-    for (orderItem of req.body.orderItems) {
+    for (orderItem of req.body.OrderItems) {
       if (orderItem.id === undefined) await OrderItem.create(orderItem)
       else await OrderItem.update(orderItem, { where: { id: orderItem.id } })
     }
