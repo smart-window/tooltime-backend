@@ -126,6 +126,18 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca601',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
+          name: 'SPRAY GUN',
+          description:
+            '',
+          images:
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_3.jpg',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {},
     )
