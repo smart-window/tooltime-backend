@@ -30,6 +30,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca593',
           categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
@@ -126,6 +127,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        
         {
           id: '109ffd20-3ea9-4c11-a87e-527fcf7ca601',
           categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
@@ -135,6 +137,30 @@ module.exports = {
             '',
           images:
             'https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_3.jpg',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca602',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356900',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
+          name: 'COMBO KIT',
+          description:
+            'This Nailer and Compressor Combo Kit includes our 165 psi, 6-Gallon, Oil-Free Pancake Compressor and Precision Point™ 18 Ga. 2-1/8 in. Brad Nailer. The pneumatic nailer features durable, maintenance-free motors, tool-free depth-of-drive adjustment for proper setting of nail heads, and a tool-free jam release mechanism for easy nail removal. The kit also includes 25 ft. of 1/4 in. air hose with a coupler and plug.',
+          images:
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DWFP1KIT/DWFP1KIT_K1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWFP1KIT/DWFP1KIT_K1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWFP1KIT/DWFP1KIT_A1.jpg',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: '109ffd20-3ea9-4c11-a87e-527fcf7ca603',
+          categoryId: '2f2d4937-b5fe-4435-8d7d-97b5bf356902',
+          sectionId: '035b7535-52a7-4699-a7cb-3c604c890f05',
+          name: 'UTILITY BAR',
+          description:
+            'For renovators and contractors alike, our lightweight, durable multifunctional bar can hook onto and twist or pull 2 x 4 boards. Its thick, 7/8 in. diameter handle provides the needed strength during tough demolition applications. Two nail claw ends accommodate different nail pulling angles and positions. BUY NOW',
+          images:
+            'https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT55020/DWHT55020_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT55020/DWHT55020_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWHT55020/DWHT55020_3.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
