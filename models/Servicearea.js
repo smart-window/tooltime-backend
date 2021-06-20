@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Location}) {
+    static associate({ Location }) {
       this.belongsTo(Location, { foreignKey: 'locationId' })
       // define association here
     }
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      zip: { type: DataTypes.INTEGER, allowNull: false },
+      zip: { type: DataTypes.INTEGER, allowNull: false, unique: true },
       city: DataTypes.STRING,
       state: DataTypes.STRING,
       latitude: DataTypes.FLOAT,
