@@ -69,6 +69,31 @@ router.post('/register', async (req, res) => {
   }
 })
 
+router.get('/servicearea', async (req, res) => {
+  try {
+    const { Servicearea, Location } = await connectToDatabase()
+    if (!req.params.id) {
+      const list = await Servicearea.findAll({
+        where: {
+          active: req.params.active ? req.params.active : true,
+        },
+        order: [['zip', 'ASC']],
+        include: [Location],
+      })
+
+      res.send(list)
+    } else {
+      const servicearea = await Servicearea.findByPk(req.params.id)
+      if (servicearea) res.send(servicearea)
+      else res.send({ error: 'model not found' })
+    }
+  } catch (e) {
+    console.log(e)
+    res.send(e)
+  }
+})
+
+
 /**
  * check authorized user
  * @returns auth user
