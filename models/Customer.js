@@ -3,7 +3,9 @@ const uuid = require('uuid')
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Customer extends Model {
-    static associate({ Customer }) {}
+    static associate({ Customer, Servicearea }) {
+      this.belongsTo(Servicearea, { foreignKey: 'zip', sourceKey: 'zip', targetKey: 'zip' })
+    }
   }
   Customer.init(
     {

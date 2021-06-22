@@ -101,12 +101,12 @@ router.get('/servicearea', async (req, res) => {
 router.get('/account', async (req, res) => {
   console.log('[GET] /auth/account')
   try {
-    const { Customer } = await connectToDatabase()
+    const { Customer, Servicearea, Location } = await connectToDatabase()
     const { accesstoken: accessToken } = req.headers
 
     if (accessToken) {
       const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
-      const user = await Customer.findOne({ where: { email } })
+      const user = await Customer.findOne({ where: { email }, include: [{ model: Servicearea, include: [Location] }] })
       if (user) {
         const responseData = {
           id: user.id,
@@ -119,6 +119,7 @@ router.get('/account', async (req, res) => {
           zip: user.zip,
           phone: user.phone,
           stripeId: user.stripeId,
+          Servicearea: user.Servicearea
         }
         responseData.accessToken = jwt.sign({ email }, process.env.AUTH_TOKEN_SECRET, {
           expiresIn: '1d',
