@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      zip: { type: DataTypes.INTEGER, allowNull: false },
+      zip: { type: DataTypes.INTEGER, allowNull: false, unique: true },
       city: DataTypes.STRING,
       state: DataTypes.STRING,
       latitude: DataTypes.FLOAT,

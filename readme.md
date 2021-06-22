@@ -1,5 +1,29 @@
-Working locally
+# Tooltime Backend Server
 
+### How to run server on local environment
+- Setup `.env` file
+  Copy `.env.dist` to `.env` and check with your Mysql config.
+- Run migration
+  ```
+  sequelize db:migrate
+  sequelize db:seed:all
+  ```
+  Check [Sequelize CLI](https://github.com/sequelize/cli) to learn more about seqeulize cli options.
+- Install deps
+  ```
+  npm install
+  ```
+- Run express server
+  ```
+  npm run dev
+  ```
+
+  or 
+  ```
+  yarn dev
+  ```
+
+### How to run server on docker environment
 1. Install deps: npm install
 2. Launch the database container: docker-compose run --build
 3. Launch the app: sls offline

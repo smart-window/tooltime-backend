@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       state: DataTypes.STRING,
       idpId: DataTypes.STRING,
       stripeId: DataTypes.STRING,
-      zip: DataTypes.STRING,
+      zip: DataTypes.STRING, // ----> Foregin key. ServiceArea
       notes: DataTypes.TEXT,
     },
     {
