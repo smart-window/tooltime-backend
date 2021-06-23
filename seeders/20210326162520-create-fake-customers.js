@@ -12,6 +12,7 @@ module.exports = {
           name: 'Oliver',
           email: 'oliver@tt.com',
           password: bcrypt.hashSync('a', bcrypt.genSaltSync(8)),
+          zip: '11385',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -20,6 +21,7 @@ module.exports = {
           name: 'William',
           email: 'william@tt.com',
           password: bcrypt.hashSync('a', bcrypt.genSaltSync(8)),
+          zip: '11221',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -28,6 +30,7 @@ module.exports = {
           name: 'James',
           email: 'james@tt.com',
           password: bcrypt.hashSync('a', bcrypt.genSaltSync(8)),
+          zip: '78572',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -36,6 +39,7 @@ module.exports = {
           name: 'Lucas',
           email: 'lucas@tt.com',
           password: bcrypt.hashSync('a', bcrypt.genSaltSync(8)),
+          zip: '78520',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -44,6 +48,7 @@ module.exports = {
           name: 'Liam',
           email: 'liam@tt.com',
           password: bcrypt.hashSync('a', bcrypt.genSaltSync(8)),
+          zip: '90022',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -53,6 +58,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.bulkDelete('customers', null, {});
+    await queryInterface.bulkDelete('customers', null, {});
   }
 };
