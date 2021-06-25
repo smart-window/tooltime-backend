@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     const { Order, OrderItem } = await connectToDatabase()
     const available = true
     for (orderItem of req.body.orderItems) {
-      const query = 'SELECT COUNT(*) AS num, (SELECT name FROM products WHERE products.id = "'+orderItem.productId+'") AS name FROM (SELECT orderitems.endDate FROM assets LEFT JOIN orderitems ON assets.orderItemId = orderitems.id WHERE assets.productId = "'+orderItem.productId+'") AS tmp WHERE ISNULL(tmp.endDate) OR tmp.endDate < "'+orderItem.startDate+'"'
+      const query = 'SELECT COUNT(*) AS num, (SELECT name FROM products WHERE products.id = "' + orderItem.productId + '") AS name FROM (SELECT orderItems.endDate FROM assets LEFT JOIN orderItems ON assets.orderItemId = orderItems.id WHERE assets.productId = "' + orderItem.productId + '") AS tmp WHERE ISNULL(tmp.endDate) OR tmp.endDate < "' + orderItem.startDate + '"'
       const result = await Order.sequelize.query(query)
       console.log(result)
       if (result[0][0].num == 0) {
