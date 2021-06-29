@@ -24,7 +24,7 @@ module.exports = {
           sectionId: '035b7535-52a7-4699-a7cb-3c604c890f01',
           name: 'CARRY COMPRESSOR',
           description:
-            '',
+            'The 4 gallon stacked tank air compressor by Stanley Bostitch has a 3.8 SCFM @ 90 PSI, and a maximum working pressure of 135 PSI. The CAP2041ST-OL features a powerful induction motor, a cast iron cylinder for long pump life and a cold start valve for fast and easy starts. This hand carry air compressor is ideal for exterior construction such as framing, roofing and any pneumatic nailing and stapling. Now includes and upgraded industrial quality pressure switch and regulator for durable operation.',
           images:
             'https://www.dewalt.com/NA/product/images/3000x3000x96/D55151/D55151_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/D55151/D55151_F1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/D55151/D55151_F2.jpg',
           createdAt: new Date(),
@@ -134,7 +134,7 @@ module.exports = {
           sectionId: '035b7535-52a7-4699-a7cb-3c604c890f02',
           name: 'SPRAY GUN',
           description:
-            '',
+            'Painting tool using compressed air from a nozzle to atomize a liquid into a controlled pattern. The spray nozzle operates by impinging high-velocity turbulent air on the surface of filaments or films of liquid, causing them to collapse to droplets with a wide range of sizes.',
           images:
             'https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_1.jpg,https://www.dewalt.com/NA/product/images/3000x3000x96/DWMT70777/DWMT70777_3.jpg',
           createdAt: new Date(),

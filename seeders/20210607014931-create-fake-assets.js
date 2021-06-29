@@ -37,7 +37,7 @@ module.exports = {
         {
           id: uuid.v4(),
           name: '1.1 HP CONTINUOUS 4 GALLON ELECTRIC HAND CARRY COMPRESSOR',
-          description: '',
+          description: '3.2 CFM delivered at 100 psi pump enables quick recovery, Oil lubricated pump improves durability, Cast iron cylinder enhances pump life, High-flow regulator for increased performance, 4 Gal. twin stack tank design proven acceptance in the market, Need help. CLICK HERE to view our Air Compressor Buying Guide',
           model: 'D55151',
           sn: '5345326-2343213',
           images:
@@ -51,7 +51,7 @@ module.exports = {
         {
           id: uuid.v4(),
           name: '1.1 HP CONTINUOUS 4 GALLON ELECTRIC HAND CARRY COMPRESSOR',
-          description: '',
+          description: '3.2 CFM delivered at 100 psi pump enables quick recovery, Oil lubricated pump improves durability, Cast iron cylinder enhances pump life, High-flow regulator for increased performance, 4 Gal. twin stack tank design proven acceptance in the market, Need help. CLICK HERE to view our Air Compressor Buying Guide',
           model: 'D55153',
           sn: '5345326-2343214',
           images:
