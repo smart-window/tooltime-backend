@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'UserLocation',
+      tableName: 'user_locations',
     },
   )
   return UserLocation
