@@ -67,4 +67,16 @@ app.get('/something', async (req, res) => {
   res.send('Successfully connected to database')
 })
 
+app.use(
+  express.json({
+    // We need the raw body to verify webhook signatures.
+    // Let's compute it only when hitting the Stripe webhook endpoint.
+    verify: function (req, res, buf) {
+      if (req.originalUrl.startsWith("/webhook")) {
+        req.rawBody = buf.toString();
+      }
+    },
+  })
+);
+
 module.exports = app

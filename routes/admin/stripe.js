@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var cors = require('cors')
 
 //const connectToDatabase = require('../database/index')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
@@ -11,7 +12,7 @@ router.get("/checkout-session", async (req, res) => {
   res.send(session);
 });
 
-router.post("/create-checkout-session", async (req, res) => {
+router.post("/create-checkout-session", cors(), async (req, res) => {
   const domainURL = process.env.DOMAIN;
   const { priceId } = req.body;
 
