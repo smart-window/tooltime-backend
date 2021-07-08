@@ -30,6 +30,6 @@ const assetRouter = require('./asset')
 router.use('/asset', requireAdminAuth, assetRouter)
 
 const stripeRouter = require('./stripe')
-router.use('/stripe', requireAdminAuth, stripeRouter)
+router.use('/stripe', stripeRouter)
 
 module.exports = router
