@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var cors = require('cors')
 
 //const connectToDatabase = require('../database/index')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
@@ -14,7 +15,6 @@ router.get("/checkout-session", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   const domainURL = process.env.DOMAIN;
   const { priceId } = req.body;
-
   // Create new Checkout Session for the order
   // Other optional params include:
   // [billing_address_collection] - to display billing address details on the page
@@ -27,13 +27,16 @@ router.post("/create-checkout-session", async (req, res) => {
       payment_method_types: ["card"],
       line_items: [
         {
-          price: priceId,
+          // price: priceId,
+          price: 'price_1JASG9IzukQ9tag0wRHz7y38',
           quantity: 1,
         },
       ],
       // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-      success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${domainURL}/canceled.html`,
+      // success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${domainURL}/#/offer`,
+      // cancel_url: `${domainURL}/canceled.html`,
+      cancel_url: `${domainURL}/#/offer`,
     });
 
     return res.redirect(303, session.url);
