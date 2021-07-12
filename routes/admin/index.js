@@ -29,7 +29,4 @@ router.use('/service-area', requireAdminAuth, serviceAreaRouter)
 const assetRouter = require('./asset')
 router.use('/asset', requireAdminAuth, assetRouter)
 
-const stripeRouter = require('./stripe')
-router.use('/stripe', stripeRouter)
-
 module.exports = router
