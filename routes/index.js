@@ -9,7 +9,7 @@ app.use(cors())
 app.options('*', cors())
 
 app.use(bodyParser.json())
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   try {
     next()
   } catch (e) {
@@ -48,7 +48,7 @@ const product = require('./product')
 app.use('/product', requireConsumerAuth, product)
 
 const stripe = require('./stripe')
-app.use('/stripe', requireConsumerAuth, stripe)
+app.use('/stripe', stripe)
 
 const category = require('./category')
 app.use('/category', requireConsumerAuth, category)
