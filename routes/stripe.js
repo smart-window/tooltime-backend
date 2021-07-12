@@ -27,15 +27,12 @@ router.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: [
         {
-          // price: priceId,
           price: 'price_1JASG9IzukQ9tag0wRHz7y38',
           quantity: 1,
         },
       ],
       // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-      // success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       success_url: `${domainURL}/billing-plan?session_id={CHECKOUT_SESSION_ID}`,
-      // cancel_url: `${domainURL}/canceled.html`,
       cancel_url: `${domainURL}/billing-plan`,
     })
 
