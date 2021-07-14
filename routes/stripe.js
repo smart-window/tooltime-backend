@@ -27,7 +27,8 @@ router.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: 'price_1JASG9IzukQ9tag0wRHz7y38',
+          // price: 'price_1JASG9IzukQ9tag0wRHz7y38',
+          price: priceId,
           quantity: 1,
         },
       ],
