@@ -47,11 +47,16 @@ router.post('/create-checkout-session', async (req, res) => {
   }
 })
 
-router.get('/config', (req, res) => {
+router.get('/config', async (req, res) => {
+  const prices = await stripe.prices.list({
+    active: true,
+    expand: ['data.product']
+  })
   res.send({
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     basicPrice: process.env.BASIC_PRICE_ID,
     proPrice: process.env.PRO_PRICE_ID,
+    prices: prices
   })
 })
 
