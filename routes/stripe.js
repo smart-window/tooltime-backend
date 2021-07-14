@@ -9,7 +9,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 router.get('/checkout-session', async (req, res) => {
   const { sessionId } = req.query
   const session = await stripe.checkout.sessions.retrieve(sessionId)
-  res.send(session)
+  const subscription = await stripe.subscriptions.retrieve(session.subscription)
+  res.send(subscription)
 })
 
 router.post('/create-checkout-session', async (req, res) => {
