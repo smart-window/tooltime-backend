@@ -27,7 +27,6 @@ router.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: [
         {
-          // price: 'price_1JASG9IzukQ9tag0wRHz7y38',
           price: priceId,
           quantity: 1,
         },
@@ -47,6 +46,22 @@ router.post('/create-checkout-session', async (req, res) => {
     })
   }
 })
+
+// CHECKOUT_SESSION_ID
+// customer ID
+// subscription ID
+// 
+// /billing-plan
+// CHECKOUT_SESSION_ID --> customer.stripeId, priceId
+// createSubscription
+// REMOVE subscript (sub)
+
+// session_id
+// stripe.sessions.retrieve(session_id) => session { subscription_id }
+// stripe.subscriptions.ret(subscription_id) => subscription { price_id }
+
+// upgrade
+// cancel
 
 router.get('/config', async (req, res) => {
   const prices = await stripe.prices.list({

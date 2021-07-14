@@ -9,6 +9,8 @@ app.use(cors())
 app.options('*', cors())
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded());
+
 app.use(function (req, res, next) {
   try {
     next()
