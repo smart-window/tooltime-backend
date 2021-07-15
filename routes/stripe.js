@@ -54,21 +54,20 @@ router.post('/cancel-subscription', async (req, res) => {
   res.send(deletedSubscription);
 })
 
-// CHECKOUT_SESSION_ID
-// customer ID
-// subscription ID
-// 
-// /billing-plan
-// CHECKOUT_SESSION_ID --> customer.stripeId, priceId
-// createSubscription
-// REMOVE subscript (sub)
+router.post('/update-subscription', async (req, res) => {
+  const { subscriptionId, priceId } = req.body
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const updatedSubscription = stripe.subscriptions.update(subscriptionId, {
+    cancel_at_period_end: false,
+    proration_behavior: 'create_prorations',
+    items: [{
+      id: subscription.items.data[0].id,
+      price: priceId,
+    }]
+  });
+  res.send(updatedSubscription);
 
-// session_id
-// stripe.sessions.retrieve(session_id) => session { subscription_id }
-// stripe.subscriptions.ret(subscription_id) => subscription { price_id }
-
-// upgrade
-// cancel
+})
 
 router.get('/config', async (req, res) => {
   const prices = await stripe.prices.list({
