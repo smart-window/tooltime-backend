@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       zip: DataTypes.STRING, // ----> Foregin key. ServiceArea
       notes: DataTypes.TEXT,
       priceId: DataTypes.STRING,
+      subscriptionId: DataTypes.STRING,
     },
     {
       sequelize,

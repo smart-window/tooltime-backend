@@ -48,6 +48,12 @@ router.post('/create-checkout-session', async (req, res) => {
   }
 })
 
+router.post('/cancel-subscription', async (req, res) => {
+  const { subscriptionId } = req.body
+  const deletedSubscription = await stripe.subscriptions.del(subscriptionId);
+  res.send(deletedSubscription);
+})
+
 // CHECKOUT_SESSION_ID
 // customer ID
 // subscription ID

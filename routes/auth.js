@@ -120,7 +120,8 @@ router.get('/account', async (req, res) => {
           phone: user.phone,
           stripeId: user.stripeId,
           Servicearea: user.Servicearea,
-          priceId: user.priceId
+          priceId: user.priceId,
+          subscriptionId: user.subscriptionId,
         }
         responseData.accessToken = jwt.sign({ email }, process.env.AUTH_TOKEN_SECRET, {
           expiresIn: '1d',
