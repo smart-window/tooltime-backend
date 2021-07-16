@@ -15,7 +15,7 @@ router.get('/checkout-session', async (req, res) => {
 
 router.post('/create-checkout-session', async (req, res) => {
   const domainURL = process.env.DOMAIN
-  const { priceId } = req.body
+  const { priceId, routeName } = req.body
   // Create new Checkout Session for the order
   // Other optional params include:
   // [billing_address_collection] - to display billing address details on the page
@@ -33,8 +33,8 @@ router.post('/create-checkout-session', async (req, res) => {
         },
       ],
       // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-      success_url: `${domainURL}/billing-plan?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${domainURL}/billing-plan`,
+      success_url: `${domainURL}${routeName}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${domainURL}${routeName}`,
     })
 
     return res.redirect(303, session.url)
