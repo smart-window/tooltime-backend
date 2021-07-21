@@ -4,14 +4,16 @@
     "password": "password",
     "database": "tooltime",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   },
   "dev": {
     "username": "root",
     "password": "password",
     "database": "tooltime",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   },
   "test": {
     "username": "root",

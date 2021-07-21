@@ -39,6 +39,14 @@ module.exports = (sequelize, DataTypes) => {
           return () => this.getDataValue('password')
         },
       },
+      status: {
+        type: DataTypes.ENUM('Pending', 'Active'),
+        defaultValue: 'Pending'
+      },
+      confirmationCode: {
+        type: DataTypes.STRING,
+        unique: true
+      },
       phone: DataTypes.STRING,
       address: DataTypes.STRING,
       city: DataTypes.STRING,

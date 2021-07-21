@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { StatusCodes } = require('http-status-codes')
 const connectToDatabase = require('../database/index')
+const nodemailer = require('../config/nodemailer.config')
 
 /**
  * customer login
@@ -28,6 +29,12 @@ router.post('/login', async (req, res) => {
   if (!isPwdMatch) {
     res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
     return
+  }
+
+  if (loggedUser.status != "Active") {
+    return res.status(401).send({
+      message: "Pending Account. Please Verify Your Email!",
+    });
   }
 
   const payload = {
@@ -59,10 +66,22 @@ router.post('/register', async (req, res) => {
   console.log('[POST] /auth/register =>', req.body)
   try {
     const { Customer } = await connectToDatabase()
+    // create confirmation code
+    const token = jwt.sign({ email: req.body.email }, process.env.SECRET_CODE)
+    req.body.confirmationCode = token
+    req.body.status = 'Pending'
+    // create new customer
     const r = await Customer.create(req.body)
     const customer = await Customer.findByPk(r.id)
+    // send response
     if (customer) res.json(customer)
     else res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
+    // send email verification
+    nodemailer.sendConfirmationEmail(
+      customer.name,
+      customer.email,
+      customer.confirmationCode
+    );
   } catch (e) {
     console.log('[POST] /auth/register.error =>', e.message)
     res.status(StatusCodes.BAD_REQUEST).send(e.message)
@@ -93,6 +112,29 @@ router.get('/servicearea', async (req, res) => {
   }
 })
 
+router.get("/confirm/:confirmationCode", async (req, res, next) => {
+  try {
+    const { Customer } = await connectToDatabase()
+    await Customer.findOne({
+      confirmationCode: req.params.confirmationCode,
+    }).then(async (customer) => {
+      if (!customer) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+
+      customer.status = "Active";
+      await Customer.update(customer, {
+        where: { id: customer.id },
+      }).then((res) => {
+        res.json(res)
+      })
+
+    }).catch((e) => console.log("error", e));
+  } catch (e) {
+    console.log('[POST] /auth/confirm/:confirmationCode.error =>', e.message)
+    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+  }
+})
 
 /**
  * check authorized user
