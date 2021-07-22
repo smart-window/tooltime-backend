@@ -23,6 +23,18 @@
   yarn dev
   ```
 
+### Email verification Setting
+- .env setup
+  Add the following code to use email verification function.
+  ```
+  # Email Verification
+  SECRET_CODE=tooltime-secret-key
+  GMAIL_ADDR=your_work_email_address   (ex: mediumtutorial2021@gmail.com)
+  GMAIL_PASS=your_work_email_password  (ex: medium2021t)
+  ```
+- To use Gmail with nodemailer, you’ll have to [enable the access for less secure apps](https://www.google.com/settings/security/lesssecureapps), otherwise it won’t send any emails.
+  
+
 ### How to run server on docker environment
 1. Install deps: npm install
 2. Launch the database container: docker-compose run --build
