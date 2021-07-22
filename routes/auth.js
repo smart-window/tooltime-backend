@@ -113,23 +113,13 @@ router.get('/servicearea', async (req, res) => {
 })
 
 router.get("/confirm/:confirmationCode", async (req, res, next) => {
+  console.log('[GET] /auth/confirm/:confirmationCode')
   try {
     const { Customer } = await connectToDatabase()
-    await Customer.findOne({
-      confirmationCode: req.params.confirmationCode,
-    }).then(async (customer) => {
-      if (!customer) {
-        return res.status(404).send({ message: "User Not found." });
-      }
-
-      customer.status = "Active";
-      await Customer.update(customer, {
-        where: { id: customer.id },
-      }).then((res) => {
-        res.json(res)
-      })
-
-    }).catch((e) => console.log("error", e));
+    const customer = await Customer.update({ status: 'Active' }, {
+      where: req.params,
+    })
+    res.json(customer)
   } catch (e) {
     console.log('[POST] /auth/confirm/:confirmationCode.error =>', e.message)
     res.status(StatusCodes.BAD_REQUEST).send(e.message)
