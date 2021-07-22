@@ -25,6 +25,7 @@
 
 ### Email verification Setting
 - .env setup
+
   Add the following code to use email verification function.
   ```
   # Email Verification
