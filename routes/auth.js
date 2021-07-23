@@ -31,11 +31,6 @@ router.post('/login', async (req, res) => {
     return
   }
 
-  if (loggedUser.status != "Active") {
-    res.status(StatusCodes.UNAUTHORIZED).send('Pending Account. Please Verify Your Email!')
-    return
-  }
-
   const payload = {
     email: loggedUser.email,
   }
