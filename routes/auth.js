@@ -20,19 +20,19 @@ router.post('/login', async (req, res) => {
   const loggedUser = await Customer.findOne({ where: { email: email } })
 
   if (!loggedUser) {
-    res.send('Incorrect')
+    res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
     return
   }
 
   const isPwdMatch = await bcrypt.compare(password, loggedUser.password())
 
   if (!isPwdMatch) {
-    res.send('Incorrect')
+    res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
     return
   }
 
   if (loggedUser.status != "Active") {
-    res.send('Inactive')
+    res.status(StatusCodes.UNAUTHORIZED).send('Pending Account. Please Verify Your Email!')
     return
   }
 
