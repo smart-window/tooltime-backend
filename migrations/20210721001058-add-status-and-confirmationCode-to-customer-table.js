@@ -5,6 +5,7 @@ module.exports = {
     return Promise.all([
       queryInterface.addColumn('customers', 'status', {
         type: Sequelize.ENUM('Pending', 'Active'),
+        defaultValue: 'Pending',
         allowNull: true,
       }),
       queryInterface.addColumn('customers', 'confirmationCode', {

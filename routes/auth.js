@@ -82,6 +82,27 @@ router.post('/register', async (req, res) => {
   }
 })
 
+
+router.post('/resend_code', async (req, res) => {
+  console.log('[POST] /auth/resend_code =>', req.body)
+  try {
+    const { Customer } = await connectToDatabase()
+    const customer = await Customer.findByPk(req.body.id)
+    // resend email verification
+    nodemailer.sendConfirmationEmail(
+      customer.name,
+      customer.email,
+      customer.confirmationCode
+    );
+    res.json(true)
+  } catch (e) {
+    console.log('[POST] /auth/resend_code.error =>', e.message)
+    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+  }
+})
+
+
+
 router.get('/servicearea', async (req, res) => {
   try {
     const { Servicearea, Location } = await connectToDatabase()
@@ -147,6 +168,7 @@ router.get('/account', async (req, res) => {
           stripeId: user.stripeId,
           Servicearea: user.Servicearea,
           priceId: user.priceId,
+          status: user.status,
           subscriptionId: user.subscriptionId,
         }
         responseData.accessToken = jwt.sign({ email }, process.env.AUTH_TOKEN_SECRET, {
