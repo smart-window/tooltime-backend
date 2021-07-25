@@ -40,7 +40,7 @@
   STRIPE_SECRET_KEY=your_stripe_secret_key
 
   # Stripe subscription data
-  DOMAIN=http://localhost:8081
+  CLIENT_APP_URL=localhost:8080
 
   # Environment
   STATIC_DIR=client

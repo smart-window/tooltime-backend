@@ -11,7 +11,7 @@ router.get('/checkout-session', async (req, res) => {
 })
 
 router.post('/create-checkout-session', async (req, res) => {
-  const domainURL = process.env.DOMAIN
+  const domainURL = process.env.CLIENT_APP_URL
   const { priceId, routeName } = req.body
 
   try {
@@ -41,32 +41,33 @@ router.post('/create-checkout-session', async (req, res) => {
 
 router.post('/cancel-subscription', async (req, res) => {
   const { subscriptionId } = req.body
-  const deletedSubscription = await stripe.subscriptions.del(subscriptionId);
-  res.send(deletedSubscription);
+  const deletedSubscription = await stripe.subscriptions.del(subscriptionId)
+  res.send(deletedSubscription)
 })
 
 router.post('/update-subscription', async (req, res) => {
   const { subscriptionId, priceId } = req.body
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId)
   const updatedSubscription = stripe.subscriptions.update(subscriptionId, {
     cancel_at_period_end: false,
     proration_behavior: 'create_prorations',
-    items: [{
-      id: subscription.items.data[0].id,
-      price: priceId,
-    }]
-  });
-  res.send(updatedSubscription);
-
+    items: [
+      {
+        id: subscription.items.data[0].id,
+        price: priceId,
+      },
+    ],
+  })
+  res.send(updatedSubscription)
 })
 
 router.get('/config', async (req, res) => {
   const prices = await stripe.prices.list({
     active: true,
-    expand: ['data.product']
+    expand: ['data.product'],
   })
   res.send({
-    prices: prices
+    prices: prices,
   })
 })
 
@@ -78,7 +79,7 @@ router.post('/customer-portal', async (req, res) => {
 
   // This is the url to which the customer will be redirected when they are done
   // managing their billing with the portal.
-  const returnUrl = process.env.DOMAIN
+  const returnUrl = process.env.CLIENT_APP_URL
 
   const portalsession = await stripe.billingPortal.sessions.create({
     customer: checkoutsession.customer,
