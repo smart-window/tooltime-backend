@@ -4,9 +4,10 @@ const { StatusCodes } = require('http-status-codes')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const connectToDatabase = require('../../database/index')
+const nodemailer = require('../../config/nodemailer.config')
 
 /**
- * customer login
+ * User login
  * @param
  * email: string
  * password: string
@@ -41,6 +42,64 @@ router.post('/login', async (req, res) => {
     return
   } catch (e) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: e.message })
+  }
+})
+
+router.post('/register', async (req, res) => {
+  console.log('[POST] /admin/auth/register =>', req.body)
+  try {
+    const { User } = await connectToDatabase()
+    // create confirmation code
+    const token = jwt.sign({ email: req.body.email }, process.env.SECRET_CODE)
+    req.body.confirmationCode = token
+    req.body.status = 'Pending'
+    // create new user
+    const r = await User.create(req.body)
+    const user = await User.findByPk(r.id)
+    // send response
+    if (user) res.json(user)
+    else res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
+    // send email verification
+    nodemailer.sendAdminConfirmationEmail(
+      user.name,
+      user.email,
+      user.confirmationCode
+    );
+  } catch (e) {
+    console.log('[POST] /admin/auth/register.error =>', e.message)
+    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+  }
+})
+
+router.get("/confirm/:confirmationCode", async (req, res, next) => {
+  console.log('[GET] /admin/auth/confirm/:confirmationCode')
+  try {
+    const { User } = await connectToDatabase()
+    const user = await User.update({ status: 'Active' }, {
+      where: req.params,
+    })
+    res.json(user)
+  } catch (e) {
+    console.log('[POST] /auth/confirm/:confirmationCode.error =>', e.message)
+    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+  }
+})
+
+router.post('/resend_code', async (req, res) => {
+  console.log('[POST] /admin/auth/resend_code =>', req.body)
+  try {
+    const { User } = await connectToDatabase()
+    const user = await User.findByPk(req.body.id)
+    // resend email verification
+    nodemailer.sendAdminConfirmationEmail(
+      user.name,
+      user.email,
+      user.confirmationCode
+    );
+    res.json(true)
+  } catch (e) {
+    console.log('[POST] /admin/auth/resend_code.error =>', e.message)
+    res.status(StatusCodes.BAD_REQUEST).send(e.message)
   }
 })
 

@@ -1,4 +1,5 @@
 'use strict'
+const bcrypt = require('bcrypt')
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -37,10 +38,24 @@ module.exports = (sequelize, DataTypes) => {
       role: {
         type: DataTypes.ENUM('admin', 'agent'),
       },
+      status: {
+        type: DataTypes.ENUM('Pending', 'Active'),
+        defaultValue: 'Pending'
+      },
+      confirmationCode: {
+        type: DataTypes.STRING,
+        unique: true
+      },
     },
     {
       sequelize,
       modelName: 'User',
+      hooks: {
+        beforeCreate: user => {
+          const salt = bcrypt.genSaltSync(8)
+          user.password = bcrypt.hashSync(user.password(), salt)
+        },
+      },
     },
   )
   return User
