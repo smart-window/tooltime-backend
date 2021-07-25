@@ -85,4 +85,4 @@ $ docker-compose up --build
 $ sequelize db:migrate
 $ sequelize db:seed:all
 
-Login with admin@admin.com / aaa
+Login with oliver@tt.com / a
