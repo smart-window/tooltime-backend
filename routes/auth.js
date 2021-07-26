@@ -15,32 +15,36 @@ const nodemailer = require('../config/nodemailer.config')
  */
 router.post('/login', async (req, res) => {
   console.log('[POST] /auth/login =>', req.body)
-  const { email, password } = req.body
-  const { Customer } = await connectToDatabase()
-  const loggedUser = await Customer.findOne({ where: { email: email } })
+  try {
+    const { email, password } = req.body
+    const { Customer } = await connectToDatabase()
+    const loggedUser = await Customer.findOne({ where: { email: email } })
 
-  if (!loggedUser) {
-    res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
+    if (!loggedUser) {
+      res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
+      return
+    }
+
+    const isPwdMatch = await bcrypt.compare(password, loggedUser.password())
+
+    if (!isPwdMatch) {
+      res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
+      return
+    }
+
+    const payload = {
+      email: loggedUser.email,
+    }
+
+    const jwtToken = jwt.sign(payload, process.env.AUTH_TOKEN_SECRET, {
+      expiresIn: '1d',
+    })
+
+    res.send({ accessToken: jwtToken })
     return
+  } catch (e) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message || 'Internal Error')
   }
-
-  const isPwdMatch = await bcrypt.compare(password, loggedUser.password())
-
-  if (!isPwdMatch) {
-    res.status(StatusCodes.UNAUTHORIZED).send('Incorrect Credentials')
-    return
-  }
-
-  const payload = {
-    email: loggedUser.email,
-  }
-
-  const jwtToken = jwt.sign(payload, process.env.AUTH_TOKEN_SECRET, {
-    expiresIn: '1d',
-  })
-
-  res.send({ accessToken: jwtToken })
-  return
 })
 
 /**
@@ -60,28 +64,21 @@ router.post('/register', async (req, res) => {
   console.log('[POST] /auth/register =>', req.body)
   try {
     const { Customer } = await connectToDatabase()
-    // create confirmation code
     const token = jwt.sign({ email: req.body.email }, process.env.SECRET_CODE)
     req.body.confirmationCode = token
     req.body.status = 'Pending'
-    // create new customer
+
     const r = await Customer.create(req.body)
     const customer = await Customer.findByPk(r.id)
-    // send response
     if (customer) res.json(customer)
     else res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
-    // send email verification
-    nodemailer.sendConfirmationEmail(
-      customer.name,
-      customer.email,
-      customer.confirmationCode
-    );
+
+    nodemailer.sendConfirmationEmail(customer.name, customer.email, customer.confirmationCode)
   } catch (e) {
     console.log('[POST] /auth/register.error =>', e.message)
-    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message)
   }
 })
-
 
 router.post('/resend_code', async (req, res) => {
   console.log('[POST] /auth/resend_code =>', req.body)
@@ -89,11 +86,7 @@ router.post('/resend_code', async (req, res) => {
     const { Customer } = await connectToDatabase()
     const customer = await Customer.findByPk(req.body.id)
     // resend email verification
-    nodemailer.sendConfirmationEmail(
-      customer.name,
-      customer.email,
-      customer.confirmationCode
-    );
+    nodemailer.sendConfirmationEmail(customer.name, customer.email, customer.confirmationCode)
     res.json(true)
   } catch (e) {
     console.log('[POST] /auth/resend_code.error =>', e.message)
@@ -125,13 +118,16 @@ router.get('/servicearea', async (req, res) => {
   }
 })
 
-router.get("/confirm/:confirmationCode", async (req, res, next) => {
+router.get('/confirm/:confirmationCode', async (req, res, next) => {
   console.log('[GET] /auth/confirm/:confirmationCode')
   try {
     const { Customer } = await connectToDatabase()
-    const customer = await Customer.update({ status: 'Active' }, {
-      where: req.params,
-    })
+    const customer = await Customer.update(
+      { status: 'Active' },
+      {
+        where: req.params,
+      },
+    )
     res.json(customer)
   } catch (e) {
     console.log('[POST] /auth/confirm/:confirmationCode.error =>', e.message)
@@ -151,7 +147,10 @@ router.get('/account', async (req, res) => {
 
     if (accessToken) {
       const { email } = jwt.verify(accessToken, process.env.AUTH_TOKEN_SECRET)
-      const user = await Customer.findOne({ where: { email }, include: [{ model: Servicearea, include: [Location] }] })
+      const user = await Customer.findOne({
+        where: { email },
+        include: [{ model: Servicearea, include: [Location] }],
+      })
       if (user) {
         const responseData = {
           id: user.id,
