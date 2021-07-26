@@ -50,5 +50,6 @@ module.exports = async () => {
   } catch (e) {
     console.log(e.message)
     console.log('!! Unable to connect to database')
+    throw new Error('Unable to connect to database')
   }
 }
