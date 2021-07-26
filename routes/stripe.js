@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const { StatusCodes } = require('http-status-codes')
 
 // Fetch the Checkout Session to display the JSON result on the success page
 router.get('/checkout-session', async (req, res) => {
@@ -40,35 +41,54 @@ router.post('/create-checkout-session', async (req, res) => {
 })
 
 router.post('/cancel-subscription', async (req, res) => {
-  const { subscriptionId } = req.body
-  const deletedSubscription = await stripe.subscriptions.del(subscriptionId)
-  res.send(deletedSubscription)
+  try {
+    const { subscriptionId } = req.body
+    const deletedSubscription = await stripe.subscriptions.del(subscriptionId)
+    res.send(deletedSubscription)
+  } catch (e) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: e.message || 'Cancel subscription error',
+    })
+  }
 })
 
 router.post('/update-subscription', async (req, res) => {
-  const { subscriptionId, priceId } = req.body
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId)
-  const updatedSubscription = stripe.subscriptions.update(subscriptionId, {
-    cancel_at_period_end: false,
-    proration_behavior: 'create_prorations',
-    items: [
-      {
-        id: subscription.items.data[0].id,
-        price: priceId,
-      },
-    ],
-  })
-  res.send(updatedSubscription)
+  console.log('[POST] /stripe/update-subscription', req.body)
+  try {
+    const { subscriptionId, priceId } = req.body
+    const subscription = await stripe.subscriptions.retrieve(subscriptionId)
+    const updatedSubscription = stripe.subscriptions.update(subscriptionId, {
+      cancel_at_period_end: false,
+      proration_behavior: 'create_prorations',
+      items: [
+        {
+          id: subscription.items.data[0].id,
+          price: priceId,
+        },
+      ],
+    })
+    res.send(updatedSubscription)
+  } catch (e) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: e.message || 'Update subscription error' })
+  }
 })
 
 router.get('/config', async (req, res) => {
-  const prices = await stripe.prices.list({
-    active: true,
-    expand: ['data.product'],
-  })
-  res.send({
-    prices: prices,
-  })
+  try {
+    const prices = await stripe.prices.list({
+      active: true,
+      expand: ['data.product'],
+    })
+    res.send({
+      prices: prices,
+    })
+  } catch (e) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: e.message || 'Get price list error',
+    })
+  }
 })
 
 router.post('/customer-portal', async (req, res) => {
