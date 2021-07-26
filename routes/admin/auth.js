@@ -50,7 +50,7 @@ router.post('/register', async (req, res) => {
   try {
     const { User } = await connectToDatabase()
     // create confirmation code
-    const token = jwt.sign({ email: req.body.email }, process.env.SECRET_CODE)
+    const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET)
     req.body.confirmationCode = token
     req.body.status = 'Pending'
     // create new user
@@ -81,7 +81,7 @@ router.get("/confirm/:confirmationCode", async (req, res, next) => {
     res.json(user)
   } catch (e) {
     console.log('[POST] /auth/confirm/:confirmationCode.error =>', e.message)
-    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message)
   }
 })
 

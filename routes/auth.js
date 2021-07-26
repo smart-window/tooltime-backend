@@ -60,17 +60,17 @@ router.post('/register', async (req, res) => {
   console.log('[POST] /auth/register =>', req.body)
   try {
     const { Customer } = await connectToDatabase()
-    // create confirmation code
-    const token = jwt.sign({ email: req.body.email }, process.env.SECRET_CODE)
+
+    const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET)
     req.body.confirmationCode = token
     req.body.status = 'Pending'
-    // create new customer
+
     const r = await Customer.create(req.body)
     const customer = await Customer.findByPk(r.id)
-    // send response
+
     if (customer) res.json(customer)
     else res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
-    // send email verification
+
     nodemailer.sendConfirmationEmail(
       customer.name,
       customer.email,
@@ -88,7 +88,7 @@ router.post('/resend_code', async (req, res) => {
   try {
     const { Customer } = await connectToDatabase()
     const customer = await Customer.findByPk(req.body.id)
-    // resend email verification
+
     nodemailer.sendConfirmationEmail(
       customer.name,
       customer.email,
@@ -135,7 +135,7 @@ router.get("/confirm/:confirmationCode", async (req, res, next) => {
     res.json(customer)
   } catch (e) {
     console.log('[POST] /auth/confirm/:confirmationCode.error =>', e.message)
-    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message)
   }
 })
 
