@@ -101,8 +101,6 @@ router.post('/resend_code', async (req, res) => {
   }
 })
 
-
-
 router.get('/servicearea', async (req, res) => {
   try {
     const { Servicearea, Location } = await connectToDatabase()
