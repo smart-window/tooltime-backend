@@ -22,8 +22,8 @@ const requireConsumerAuth = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err)
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-      error: err.message,
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: err.message || 'Authentication failed',
     })
   }
 }
@@ -48,8 +48,8 @@ const requireAdminAuth = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err)
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-      error: err.message,
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: err.message || 'Authentication failed',
     })
   }
 }

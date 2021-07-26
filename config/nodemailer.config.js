@@ -24,7 +24,7 @@ module.exports.sendConfirmationEmail = (name, email, confirmationCode) => {
           <a href=${process.env.CLIENT_APP_URL}/auth/confirm/${confirmationCode}> Click here</a>
           </div>`,
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err.message))
 }
 
 module.exports.sendAdminConfirmationEmail = (name, email, confirmationCode) => {
@@ -41,6 +41,5 @@ module.exports.sendAdminConfirmationEmail = (name, email, confirmationCode) => {
           <a href=${process.env.ADMIN_APP_URL}/#/auth/confirm/${confirmationCode}> Click here</a>
           </div>`,
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err.message))
 }
-

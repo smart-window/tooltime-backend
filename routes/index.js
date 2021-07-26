@@ -4,20 +4,23 @@ const cors = require('cors')
 const app = express()
 const connectToDatabase = require('../database/index') // initialize connection
 const { requireConsumerAuth } = require('../controllers/auth')
+const logger = require('morgan')
 
 app.use(cors())
 app.options('*', cors())
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded())
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   try {
     next()
   } catch (e) {
     res.status(500).send(e)
   }
 })
+
+app.use(logger('dev'))
 
 const adminRoutes = require('./admin')
 app.use('/admin', adminRoutes)
@@ -73,12 +76,12 @@ app.use(
   express.json({
     // We need the raw body to verify webhook signatures.
     // Let's compute it only when hitting the Stripe webhook endpoint.
-    verify: function (req, res, buf) {
-      if (req.originalUrl.startsWith("/webhook")) {
-        req.rawBody = buf.toString();
+    verify: function(req, res, buf) {
+      if (req.originalUrl.startsWith('/webhook')) {
+        req.rawBody = buf.toString()
       }
     },
-  })
-);
+  }),
+)
 
 module.exports = app
