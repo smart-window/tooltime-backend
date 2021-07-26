@@ -50,7 +50,7 @@ router.post('/register', async (req, res) => {
   try {
     const { User } = await connectToDatabase()
     // create confirmation code
-    const token = jwt.sign({ email: req.body.email }, process.env.SECRET_CODE)
+    const token = jwt.sign({ email: req.body.email }, process.env.AUTH_TOKEN_SECRET)
     req.body.confirmationCode = token
     req.body.status = 'Pending'
     // create new user
@@ -60,28 +60,27 @@ router.post('/register', async (req, res) => {
     if (user) res.json(user)
     else res.status(StatusCodes.BAD_REQUEST).json({ error: 'model not found' })
     // send email verification
-    nodemailer.sendAdminConfirmationEmail(
-      user.name,
-      user.email,
-      user.confirmationCode
-    );
+    nodemailer.sendAdminConfirmationEmail(user.name, user.email, user.confirmationCode)
   } catch (e) {
     console.log('[POST] /admin/auth/register.error =>', e.message)
     res.status(StatusCodes.BAD_REQUEST).send(e.message)
   }
 })
 
-router.get("/confirm/:confirmationCode", async (req, res, next) => {
+router.get('/confirm/:confirmationCode', async (req, res, next) => {
   console.log('[GET] /admin/auth/confirm/:confirmationCode')
   try {
     const { User } = await connectToDatabase()
-    const user = await User.update({ status: 'Active' }, {
-      where: req.params,
-    })
+    const user = await User.update(
+      { status: 'Active' },
+      {
+        where: req.params,
+      },
+    )
     res.json(user)
   } catch (e) {
     console.log('[POST] /auth/confirm/:confirmationCode.error =>', e.message)
-    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message)
   }
 })
 
@@ -91,11 +90,7 @@ router.post('/resend_code', async (req, res) => {
     const { User } = await connectToDatabase()
     const user = await User.findByPk(req.body.id)
     // resend email verification
-    nodemailer.sendAdminConfirmationEmail(
-      user.name,
-      user.email,
-      user.confirmationCode
-    );
+    nodemailer.sendAdminConfirmationEmail(user.name, user.email, user.confirmationCode)
     res.json(true)
   } catch (e) {
     console.log('[POST] /admin/auth/resend_code.error =>', e.message)

@@ -24,30 +24,13 @@
   yarn dev
   ```
 
-### .env file Setting
-  ```
-  host=localhost
-  port=3306
-  DB_NAME=tooltime
-  DB_USER=root
-  DB_PASSWORD=password
-  AUTH_TOKEN_SECRET=123456
-  AUTH_TOKEN_LIFE=86400
-  REFRESH_TOKEN_SECRET=123456
-  REFRESH_TOKEN_LIFE=86400
+### copy .env.dist to .env
 
   # Stripe keys
   STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
   STRIPE_SECRET_KEY=your_stripe_secret_key
 
-  # Stripe subscription data
-  CLIENT_APP_URL=localhost:8080
-
-  # Environment
-  STATIC_DIR=client
-
   # Email Verification
-  SECRET_CODE=tooltime-secret-key
   GMAIL_ADDR=your_work_email_address   (ex: mediumtutorial2021@gmail.com)
   GMAIL_PASS=your_work_email_password  (ex: medium2021t)
   ```
