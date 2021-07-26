@@ -64,7 +64,7 @@ router.post('/register', async (req, res) => {
   console.log('[POST] /auth/register =>', req.body)
   try {
     const { Customer } = await connectToDatabase()
-    const token = jwt.sign({ email: req.body.email }, process.env.SECRET_CODE)
+    const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET)
     req.body.confirmationCode = token
     req.body.status = 'Pending'
 
