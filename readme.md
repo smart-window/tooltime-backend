@@ -2,7 +2,8 @@
 
 ### How to run server on local environment
 - Setup `.env` file
-  Copy `.env.dist` to `.env` and check with your Mysql config.
+  Copy `.env.example` to `.env` and check with your Mysql config.
+  
 - Run migration
   ```
   sequelize db:migrate
