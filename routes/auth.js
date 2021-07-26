@@ -95,6 +95,25 @@ router.post('/resend_code', async (req, res) => {
   }
 })
 
+router.post('/save-subscription', async (req, res) => {
+  console.log('[POST] /auth/save-subscription =>', req.body)
+  try {
+    const { Customer } = await connectToDatabase()
+
+    const customer = await Customer.update(
+      req.body,
+      {
+        where: { email: req.body.email },
+      },
+    )
+    res.json(customer)
+
+  } catch (e) {
+    console.log('[POST] /auth/save-subscription.error =>', e.message)
+    res.status(StatusCodes.BAD_REQUEST).send(e.message)
+  }
+})
+
 router.get('/servicearea', async (req, res) => {
   try {
     const { Servicearea, Location } = await connectToDatabase()
